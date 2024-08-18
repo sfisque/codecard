@@ -65,6 +65,8 @@ String getBinCode(char str){
   if(str == '+') return String("010001010");
   if(str == '%') return String("000101010");  
   if(str == '#') return String("010010100");
+
+  return "";
 }
 
 

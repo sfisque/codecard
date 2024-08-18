@@ -80,3 +80,4 @@ uint8_t output_row_mono_buffer[max_row_width / 8]; // buffer for at least one ro
 uint8_t output_row_color_buffer[max_row_width / 8]; // buffer for at least one row of color bits
 uint8_t mono_palette_buffer[max_palette_pixels / 8]; // palette buffer for depth <= 8 b/w
 uint8_t color_palette_buffer[max_palette_pixels / 8]; // palette buffer for depth <= 8 c/w
+

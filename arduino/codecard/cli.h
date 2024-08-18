@@ -34,7 +34,7 @@ void help() {
       Serial.println(F(""));
       Serial.print(F("  "));
     }
-    if (keys[i] == "initalsetup") {
+    if( keys[i] == "initalsetup") {
       continue;
     } 
     Serial.print(keys[i]);

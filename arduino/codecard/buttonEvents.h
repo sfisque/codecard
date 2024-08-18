@@ -9,12 +9,12 @@ void pushButton(String btnLabel, int btnFunction){
   String typeOfPress = (btnFunction == 1) ? " - short pressed" : " - long pressed";
   String upperCaseBtnLabel = btnLabel;
   upperCaseBtnLabel.toUpperCase();
-  template9(upperCaseBtnLabel + typeOfPress , "please wait...", "white");
+//   template9(upperCaseBtnLabel + typeOfPress , "please wait...", "white");
   Serial.println("Button " + btnLabel + typeOfPress);
   Serial.println(F(">>>"));
 
   if (wifiConnect() == false) {
-    template3("No Internet", "", "Connect your card to the Code Card Terminal to configure your wifi settings.", "wifi", "", "white", "");
+    // template3("No Internet", "", "Connect your card to the Code Card Terminal to configure your wifi settings.", "wifi", "", "white", "");
     return;
   }
  
@@ -27,11 +27,11 @@ void pushButton(String btnLabel, int btnFunction){
   if (protocol == "https:") {
     int port = (portString.length() != 0) ? portString.toInt() : 443;
     String response = secureRequest(host, port, url, btnLabel, btnFunction);
-    if (response != "") { parseJson(response); }
+    // if (response != "") { parseJson(response); }
   } else {
     int port = (portString.length() != 0) ? portString.toInt() : 80;
     String response = request(host, port, url, btnLabel, btnFunction);
-    if (response != "") { parseJson(response); }
+    // if (response != "") { parseJson(response); }
   }
 
 }

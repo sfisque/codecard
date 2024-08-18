@@ -1,10 +1,14 @@
+#include "GxEPD2_EPD.h"
 /*
   template.h
   
 */
 
-void imageFromUrl(String url, int16_t x, int16_t y, String fingerprint = "", bool with_color = true);
+/*
+     void imageFromUrl(String url, int16_t x, int16_t y, String fingerprint = "", bool with_color = true);
+*/
 
+/*
 void drawBarcode39(int x, int y, int width, int height, int pitch, String barcode){
   int c = 0;
   display.fillRect(x, y, width, height, GxEPD_WHITE);
@@ -36,7 +40,9 @@ void drawBarcode39(int x, int y, int width, int height, int pitch, String barcod
   }
   
 }
+*/
 
+/*
 void drawIcon64(int x, int y, String icon, long color){
   
   if (icon == "01d" || icon == "01n") { display.drawInvertedBitmap(x, y, weather01, 64, 64, color); return; }
@@ -68,7 +74,9 @@ void drawIcon64(int x, int y, String icon, long color){
   if (icon == "nighthacker") { display.drawInvertedBitmap(x, y, nighthacker64, 64, 64, color); return; }   
   if (icon == "wifi") { display.drawInvertedBitmap(x, y, wifi64, 64, 64, color); return; } 
 }
+*/
 
+/*
 void drawIcon128(int x, int y, String icon, long color){
   if (icon == "oracle") { display.drawInvertedBitmap(x, y, oracle128, 128, 128, color); return; }
   if (icon == "champion") { display.drawInvertedBitmap(x, y, champion128, 128, 128, color); return; }  
@@ -85,12 +93,16 @@ void drawIcon128(int x, int y, String icon, long color){
   if (icon == "nighthacker") { display.drawInvertedBitmap(x, y, nighthacker128, 128, 128, color); return; } 
   if (icon == "wifi") { display.drawInvertedBitmap(x, y, wifi128, 128, 128, color); return; } 
 }
+*/
 
+/*
 void drawBackground(int x, int y, String backgroundImage, long color){ 
   if (backgroundImage == "codeone") { display.drawInvertedBitmap(x, y, codeone264, display.width(), display.height(), color); return; } 
   if (backgroundImage == "oracle") { display.drawInvertedBitmap(x, y, oracle264, display.width(), display.height(), color); return; } 
 }
+*/
 
+/*
 void drawBadge(int x, int y, int radius, String badge, long color) {
     int circleColor = GxEPD_BLACK;
     int badgeText = GxEPD_WHITE;
@@ -136,7 +148,9 @@ void drawBadge(int x, int y, int radius, String badge, long color) {
  
 
 }
+*/
 
+/*
 
 void template1(String title, String subtitle, String body, String icon, String badge, String backgroundColor, String fingerprint) {
   long bgColor = GxEPD_WHITE;
@@ -183,7 +197,9 @@ void template1(String title, String subtitle, String body, String icon, String b
   }
     
 }
+*/
 
+/*
 void template2(String title, String subtitle, String body, String icon, String badge, String backgroundColor, String fingerprint) {
   long bgColor = GxEPD_WHITE;
   long txtColor = GxEPD_BLACK;
@@ -236,7 +252,9 @@ void template2(String title, String subtitle, String body, String icon, String b
   }
     
 }
+*/
 
+/*
 void template3(String title, String subtitle, String body, String icon, String badge, String backgroundColor, String fingerprint) {
   long bgColor = GxEPD_WHITE;
   long txtColor = GxEPD_BLACK;
@@ -282,7 +300,9 @@ void template3(String title, String subtitle, String body, String icon, String b
   }
     
 }
+*/
 
+/*
 void template4(String title, String subtitle, String body, String icon, String badge, String backgroundColor, String fingerprint) {
   long bgColor = GxEPD_WHITE;
   long txtColor = GxEPD_BLACK;
@@ -328,7 +348,9 @@ void template4(String title, String subtitle, String body, String icon, String b
   }
     
 }
+*/
 
+/*
 void template5(String title, String subtitle, String body, String backgroundColor) {
   long bgColor = GxEPD_WHITE;
   long txtColor = GxEPD_BLACK;
@@ -368,7 +390,9 @@ void template5(String title, String subtitle, String body, String backgroundColo
   while (display.nextPage());
     
 }
+*/
 
+/*
 void template6(String title, String subtitle, String body, String backgroundColor) {
   long bgColor = GxEPD_WHITE;
   long txtColor = GxEPD_BLACK;
@@ -408,7 +432,9 @@ void template6(String title, String subtitle, String body, String backgroundColo
   while (display.nextPage());
     
 }
+*/
 
+/*
 // Minimalist - No Icon
 void template7(String title, String subtitle, String backgroundColor, String backgroundImage, String fingerprint){
 
@@ -453,7 +479,9 @@ void template7(String title, String subtitle, String backgroundColor, String bac
   while (display.nextPage());
 
 }
+*/
 
+/*
 // Minimalist - No Icon
 void template8(String backgroundColor, String backgroundImage, String fingerprint){
 
@@ -512,7 +540,9 @@ void template9(String title, String subtitle, String backgroundColor){
   }
   while (display.nextPage());
 }
+*/
 
+/*
 
 // barcode template 43 max chars
 void template10(String title, String subtitle, String body, String backgroundColor, String barcode){
@@ -556,7 +586,9 @@ void template10(String title, String subtitle, String body, String backgroundCol
   while (display.nextPage());
 
 }
+*/
 
+/*
 void template11(String title, String subtitle, String icon, String badge, String backgroundColor, String fingerprint) {
   long bgColor = GxEPD_WHITE;
   long txtColor = GxEPD_BLACK;
@@ -606,10 +638,88 @@ void template11(String title, String subtitle, String icon, String badge, String
   }
     
 }
+*/
 
+/*
 void custom(){
   
 }
+*/
+
+
+/*
+    Menu Stuff
+*/
+
+#define MENU_SIZE 4
+#define MENU_5_EM "MMMMM"
+
+String menu[ MENU_SIZE ] = {
+    "File", "Edit", "Info", "Fun"
+};
+
+int current = 0;
+
+void nextMenu()
+{
+    current = ( current + 1 ) % MENU_SIZE;
+}
+
+
+void selectMenu()
+{
+    Serial.println( menu[ current ] );
+}
+
+void menuScreen()
+{
+    int16_t tbx, tby; 
+    uint16_t tbw, tbh;
+
+    // display.setFullWindow();
+
+    display.setTextColor( GxEPD_BLACK, GxEPD_WHITE );    
+    // display.setFont( &FreeSansBold9pt7b );
+    display.setFont( &FreeSansBold18pt7b );
+    display.getTextBounds( MENU_5_EM, 0, 0, &tbx, &tby, &tbw, &tbh );
+
+    display.setPartialWindow( 0, 0, tbw + 16, 5 * tbh + 20 );
+
+    display.firstPage();
+
+    do 
+    {
+//        display.fillScreen(GxEPD_WHITE);
+        // display.setTextColor( GxEPD_BLACK );    
+        // // display.setFont( &FreeSansBold9pt7b );
+        // display.setFont( &FreeSansBold18pt7b );
+        // display.getTextBounds( MENU_5_EM, 0, 0, &tbx, &tby, &tbw, &tbh );
+        // display.updateWindow( 0, 0, tbw, tbh, true );
+
+        for( int i = 0; i < 4; i ++ )
+        {
+            display.setCursor( 4, ( i + 1 ) * ( tbh + 8 ) );
+
+            if( i == current )
+            {
+                display.fillRect( 0, i * ( tbh + 8 ) + 2, tbw + 16, tbh + 12, GxEPD_BLACK );
+                display.setTextColor( GxEPD_WHITE, GxEPD_BLACK );    
+            }
+            else
+            {
+                display.setTextColor( GxEPD_BLACK, GxEPD_WHITE );    
+            }
+
+            display.println( menu[ i ] );
+            delay( 10 );
+        }
+
+    }
+    // display.display( true );
+    while ( display.nextPage() );    // flashing
+    // display.refresh( 0, 0, tbw + 16, 5 * tbh + 20 ); // wierd lines
+}
+
 
 void defaultScreen(){
   String mac = WiFi.macAddress();
@@ -620,8 +730,9 @@ void defaultScreen(){
   display.firstPage();
   do {
     display.fillScreen(GxEPD_WHITE);
-    display.drawInvertedBitmap(0, 0, oracle264, display.width(), display.height(), GxEPD_BLACK);
+    // display.drawInvertedBitmap(0, 0, oracle264, display.width(), display.height(), GxEPD_BLACK);
   }
   while (display.nextPage());    
-  template10(projectName, projectAuthor, projectSite, "white", mac);
+//   template10(projectName, projectAuthor, projectSite, "white", mac);
 }
+

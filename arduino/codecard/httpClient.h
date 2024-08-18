@@ -176,7 +176,7 @@ void httpsImage(String host, int port, String url, int16_t x, int16_t y, String 
   axTLS::WiFiClientSecure secureClient;
   
   bool connection_ok = false;
-  uint32_t startTime = millis();
+//   uint32_t startTime = millis();
   
   if ((x >= display.width()) || (y >= display.height())) return;
   
@@ -236,7 +236,7 @@ void httpsImage(String host, int port, String url, int16_t x, int16_t y, String 
     }
   }
   if (!connection_ok) return;
-  displayImageFromUrl(secureClient, x, y, connection_ok, with_color);
+//   displayImageFromUrl(secureClient, x, y, connection_ok, with_color);
 }
 
 
@@ -285,7 +285,7 @@ void httpImage(String host, int port, String url, int16_t x, int16_t y, bool wit
     }
   }
   if (!connection_ok) return;
-  displayImageFromUrl(client, x, y, connection_ok, with_color);
+//   displayImageFromUrl(client, x, y, connection_ok, with_color);
 }
 
 void imageFromUrl(String url, int16_t x, int16_t y, String fingerprint, bool with_color){

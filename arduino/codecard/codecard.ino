@@ -59,8 +59,11 @@ void setup() {
   display.setRotation(3);
   EEPROM.begin(eepromSize);
 
+    menuScreen();
+
+
   if (btn1State == HIGH && btn2State == HIGH){
-    defaultScreen();
+    // defaultScreen();
     help();
     wifiConnect();
     startTime = millis();
@@ -75,34 +78,19 @@ void setup() {
   
   if (startTime < 250000) {
     if (btn1State == HIGH){
-      pushButton("a", 1);
+//      pushButton("a", 1);
     }else if (btn2State == HIGH){
-      pushButton("b", 1);
+//      pushButton("b", 1);
     }
   }else  {
     if (btn1State == HIGH){
-      pushButton("a", 2);
+//      pushButton("a", 2);
     }else if (btn2State == HIGH){
-      pushButton("b", 2);
+//      pushButton("b", 2);
     }
   }
 
-    // int running = 1;
-
-    // while( running )
-    // {
-    //     running = (running + 1) % 600;
-    //     delay( 100 );
-
-    //     btn1State = digitalRead(BUTTON1_PIN);
-    //     btn2State = digitalRead(BUTTON2_PIN);
-
-    //     if( btn1State == HIGH || btn2State == HIGH )
-    //     {
-    //         template1("Button Pushed", "",  "" ,"","","", "");
-    //     }
-    // }
-  shutdown();
+//  shutdown();
 }
 
 void shutdown() {
@@ -113,6 +101,11 @@ void shutdown() {
 }
 
 void loop() {
+
+  pinMode(BUTTON1_PIN, INPUT_PULLUP);
+  pinMode(BUTTON2_PIN, INPUT_PULLUP); 
+
+    delay( 100 );
   if (Serial.available()) {
     String input = Serial.readString();
     input.trim();
@@ -121,10 +114,30 @@ void loop() {
   }
   
   currentTime = millis();
-  if (currentTime - startTime >= 1000 * 240)
+  if (currentTime - startTime >= 1000 * 60 ) // one minute timeout
   {
     startTime = currentTime;
     shutdown();
   }
-  
+
+    delay( 100 );
+
+  btn1State = digitalRead(BUTTON1_PIN);
+  btn2State = digitalRead(BUTTON2_PIN);
+
+  if( btn1State == HIGH )
+  {
+    Serial.println( "button A pressed" );
+    startTime = currentTime;
+    nextMenu();
+    menuScreen();
+  }
+
+  if( btn2State == HIGH )
+  {
+    Serial.println( "button B pressed" );
+    startTime = currentTime;
+    selectMenu();
+  }
+
 }

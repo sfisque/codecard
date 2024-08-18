@@ -3,6 +3,7 @@
   
 */
 
+/*
 void parseJson(String jsonString) {  
   
   const size_t capacity = jsonString.length();
@@ -88,13 +89,18 @@ void parseJson(String jsonString) {
   }
   
 }
+*/
+
+/*
 
 void parseJsonObject(JsonObject& root) {
   String jsonStr;
   root.printTo(jsonStr);
   parseJson(jsonStr);
 }
+*/
 
+/*
 
 void displayImageFromUrlTest(WiFiClient& client, int16_t x, int16_t y, bool connection_ok, bool with_color) {
   bool valid = false; // valid format to be handled
@@ -162,6 +168,9 @@ void displayImageFromUrlTest(WiFiClient& client, int16_t x, int16_t y, bool conn
 
   
 }
+*/
+
+/*
 
 void displayImageFromUrl(WiFiClient& client, int16_t x, int16_t y, bool connection_ok, bool with_color) {
   bool valid = false; // valid format to be handled
@@ -195,11 +204,11 @@ void displayImageFromUrl(WiFiClient& client, int16_t x, int16_t y, bool connecti
       Serial.println(height);
       // BMP rows are padded (if needed) to 4-byte boundary
       uint32_t rowSize = (width * depth / 8 + 3) & ~3;
-      if (height < 0)
-      {
-        height = -height;
-        flip = false;
-      }
+    //   if (height < 0)
+    //   {
+    //     height = -height;
+    //     flip = false;
+    //   }
       uint16_t w = width;
       uint16_t h = height;
       if ((x + w - 1) >= display.width())  w = display.width()  - x;
@@ -374,3 +383,4 @@ void displayImageFromUrl(WiFiClient& client, int16_t x, int16_t y, bool connecti
     Serial.println("bitmap format not handled.");
   }
 }
+*/
