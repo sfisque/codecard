@@ -1,4 +1,12 @@
+#include <cstdlib>
 #include "GxEPD2_EPD.h"
+
+// builds with 1.1.10
+// builds with 1.2.16
+// builds with 1.3.9
+// builds with 1.4.9
+// builds with 1.5.8
+
 /*
   template.h
   
@@ -675,6 +683,8 @@ void menuScreen()
 {
     int16_t tbx, tby; 
     uint16_t tbw, tbh;
+    int loop = 0;
+    char loopStr[ 4 ] = { 0, 0, 0, 0 };
 
     // display.setFullWindow();
 
@@ -683,7 +693,7 @@ void menuScreen()
     display.setFont( &FreeSansBold18pt7b );
     display.getTextBounds( MENU_5_EM, 0, 0, &tbx, &tby, &tbw, &tbh );
 
-    display.setPartialWindow( 0, 0, tbw + 16, 5 * tbh + 20 );
+    display.setPartialWindow( 0, 0, tbw + 16, 5 * tbh + 12 );
 
     display.firstPage();
 
@@ -702,7 +712,7 @@ void menuScreen()
 
             if( i == current )
             {
-                display.fillRect( 0, i * ( tbh + 8 ) + 2, tbw + 16, tbh + 12, GxEPD_BLACK );
+                display.fillRect( 0, i * ( tbh + 8 ) + 4, tbw + 16, tbh + 12, GxEPD_BLACK );
                 display.setTextColor( GxEPD_WHITE, GxEPD_BLACK );    
             }
             else
@@ -711,22 +721,24 @@ void menuScreen()
             }
 
             display.println( menu[ i ] );
-            delay( 10 );
+            yield();
         }
-
+        Serial.print( "\tmenuScreen::" );
+        Serial.println( loop ++ );
     }
-    // display.display( true );
     while ( display.nextPage() );    // flashing
+    //display.display( true ); // garbage
     // display.refresh( 0, 0, tbw + 16, 5 * tbh + 20 ); // wierd lines
 }
 
 
 void defaultScreen(){
-  String mac = WiFi.macAddress();
-  mac.replace(":", "");
-  mac.toUpperCase();
+  // String mac = WiFi.macAddress();
+  // mac.replace(":", "");
+  // mac.toUpperCase();
   
   display.setFullWindow();
+
   display.firstPage();
   do {
     display.fillScreen(GxEPD_WHITE);

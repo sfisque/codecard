@@ -8,6 +8,15 @@
 #include <EEPROM.h>
 #include <GxEPD2_BW.h>        // Download/Clone and put in Arduino Library https://github.com/ZinggJM/GxEPD2
 
+// ArduinoJson - 7.1.0
+// GxEPD2_BW - 1.5.8
+// ESP8266Wifi - 2.4.2
+// ESP8266Wifi - 2.5.2 - requires changes to TLS support in WiFi support - breaking changes
+// ESP8266Wifi - 2.6.3 - ?
+// ESP8266Wifi - 2.7.4 - ?
+// ESP8266Wifi - 3.0.2 - ?
+// ESP8266Wifi - 3.1.2 - ?
+
 // Also make sure you have the Adafruit GFX library
 
 #define WAKE_PIN 16

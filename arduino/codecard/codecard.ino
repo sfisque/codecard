@@ -54,9 +54,12 @@ void setup() {
     startTime++;
     if (startTime > (100000 * 8)) { break; }
   }
-  Serial.begin(BAUD_SPEED);
-  display.init();
+  Serial.begin( BAUD_SPEED );
+  display.init(( /* BAUD_SPEED */ (uint32_t) 0, false, (uint16_t) 5, false ));
   display.setRotation(3);
+
+  defaultScreen();
+
   EEPROM.begin(eepromSize);
 
     menuScreen();
@@ -120,7 +123,7 @@ void loop() {
     shutdown();
   }
 
-    delay( 100 );
+    yield();
 
   btn1State = digitalRead(BUTTON1_PIN);
   btn2State = digitalRead(BUTTON2_PIN);
