@@ -663,7 +663,7 @@ void custom(){
 #define MENU_5_EM "MMMMM"
 
 String menu[ MENU_SIZE ] = {
-    "File", "Edit", "Info", "Fun"
+    "Card", "Web", "Config", "About"
 };
 
 int current = 0;
@@ -683,13 +683,8 @@ void menuScreen()
 {
     int16_t tbx, tby; 
     uint16_t tbw, tbh;
-    int loop = 0;
-    char loopStr[ 4 ] = { 0, 0, 0, 0 };
-
-    // display.setFullWindow();
 
     display.setTextColor( GxEPD_BLACK, GxEPD_WHITE );    
-    // display.setFont( &FreeSansBold9pt7b );
     display.setFont( &FreeSansBold18pt7b );
     display.getTextBounds( MENU_5_EM, 0, 0, &tbx, &tby, &tbw, &tbh );
 
@@ -699,13 +694,6 @@ void menuScreen()
 
     do 
     {
-//        display.fillScreen(GxEPD_WHITE);
-        // display.setTextColor( GxEPD_BLACK );    
-        // // display.setFont( &FreeSansBold9pt7b );
-        // display.setFont( &FreeSansBold18pt7b );
-        // display.getTextBounds( MENU_5_EM, 0, 0, &tbx, &tby, &tbw, &tbh );
-        // display.updateWindow( 0, 0, tbw, tbh, true );
-
         for( int i = 0; i < 4; i ++ )
         {
             display.setCursor( 4, ( i + 1 ) * ( tbh + 8 ) );
@@ -723,28 +711,20 @@ void menuScreen()
             display.println( menu[ i ] );
             yield();
         }
-        Serial.print( "\tmenuScreen::" );
-        Serial.println( loop ++ );
     }
     while ( display.nextPage() );    // flashing
-    //display.display( true ); // garbage
-    // display.refresh( 0, 0, tbw + 16, 5 * tbh + 20 ); // wierd lines
 }
 
 
-void defaultScreen(){
-  // String mac = WiFi.macAddress();
-  // mac.replace(":", "");
-  // mac.toUpperCase();
-  
-  display.setFullWindow();
+void defaultScreen()
+{  
+    display.setFullWindow();
 
-  display.firstPage();
-  do {
-    display.fillScreen(GxEPD_WHITE);
-    // display.drawInvertedBitmap(0, 0, oracle264, display.width(), display.height(), GxEPD_BLACK);
-  }
-  while (display.nextPage());    
-//   template10(projectName, projectAuthor, projectSite, "white", mac);
+    display.firstPage();
+    do 
+    {
+        display.fillScreen(GxEPD_WHITE);
+    }
+    while (display.nextPage());    
 }
 
