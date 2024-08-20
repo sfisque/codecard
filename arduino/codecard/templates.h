@@ -674,7 +674,7 @@ void custom(){
     Menu Stuff
 */
 
-#define MENU_SIZE 4
+#define MENU_SIZE 15
 #define MENU_5_EM "MMMMM"
 
 #define SCREEN_1 1
@@ -726,12 +726,13 @@ void initNavigation()
     navigation[ 9 ] = new Navigation( "Fetch Four", 4, 5, SCREEN_3 );
 
     navigation[ 10 ] = new Navigation( "Back", 100, 11, SCREEN_4 );
-    navigation[ 11 ] = new Navigation( "115200 bps", 5, 12, SCREEN_4 );
-    navigation[ 12 ] = new Navigation( "57600 bps", 6, 13, SCREEN_4 );
-    navigation[ 13 ] = new Navigation( "19200 bps", 7, 14, SCREEN_4 );
-    navigation[ 14 ] = new Navigation( "9600 bps", 8, 10, SCREEN_4 );
+    navigation[ 11 ] = new Navigation( "Start Term", 5, 12, SCREEN_4 );
+    navigation[ 12 ] = new Navigation( "Stop Term", 6, 13, SCREEN_4 );
+    navigation[ 13 ] = new Navigation( "Native", 7, 10, SCREEN_4 );
+    // navigation[ 14 ] = new Navigation( "9600 bps", 8, 10, SCREEN_4 );
 
-    navigation[ 15 ] = new Navigation( "Close About", 100, 15, SCREEN_5 );
+    // navigation[ 15 ] = new Navigation( "Close About", 100, 15, SCREEN_5 );
+    navigation[ 14 ] = new Navigation( "Close About", 100, 14, SCREEN_5 );
 }
 
 
@@ -777,7 +778,7 @@ void selectMenu()
         case 5:
         case 6:
         case 7:
-        case 8:
+        // case 8:
         {
             break;
         }
@@ -841,7 +842,7 @@ void menuScreen()
     do 
     {
         int i = 0;
-        for( int index = 0; index < 16; index ++ )
+        for( int index = 0; index < MENU_SIZE; index ++ )
         {
             if( navigation[ index ]->screen == screen )
             {
@@ -917,8 +918,8 @@ void aboutScreen()
     uint16_t tbw, tbh;
 
     display.setTextColor( GxEPD_BLACK, GxEPD_WHITE );    
-    display.setFont( &FreeSansBold18pt7b );
-    display.getTextBounds( "MMMMMMMMMM", 0, 0, &tbx, &tby, &tbw, &tbh );
+    display.setFont( &FreeSansBold12pt7b );
+    display.getTextBounds( "M", 0, 0, &tbx, &tby, &tbw, &tbh );
 
     display.setPartialWindow( 0, 0, display.width(), display.height() );
 
@@ -927,7 +928,7 @@ void aboutScreen()
     do 
     {
         display.setCursor( 4, tbh + 8 );
-        display.println( "About CodeCard" );
+        display.println( "About Lattice Card" );
     }
     while ( display.nextPage() );    // flashing
 }
