@@ -62,8 +62,9 @@ void setup() {
 
   EEPROM.begin(eepromSize);
 
-    menuScreen();
+    initNavigation();
 
+    menuScreen();
 
   if (btn1State == HIGH && btn2State == HIGH){
     // defaultScreen();
@@ -133,7 +134,7 @@ void loop() {
     Serial.println( "button A pressed" );
     startTime = currentTime;
     nextMenu();
-    menuScreen();
+    chooseScreen();
   }
 
   if( btn2State == HIGH )

@@ -11,6 +11,21 @@
   template.h
   
 */
+// function prototypes
+
+void initNavigation();
+void nextMenu();
+void selectMenu();
+void chooseScreen();
+void menuScreen();
+void cardScreen();
+void configScreen();
+void aboutScreen();
+void defaultScreen();
+
+
+
+
 
 /*
      void imageFromUrl(String url, int16_t x, int16_t y, String fingerprint = "", bool with_color = true);
@@ -662,22 +677,153 @@ void custom(){
 #define MENU_SIZE 4
 #define MENU_5_EM "MMMMM"
 
+#define SCREEN_1 1
+#define SCREEN_2 2
+#define SCREEN_3 3
+#define SCREEN_4 4
+#define SCREEN_5 5
+
+class Navigation
+{
+    public:
+
+    String label;
+    char code;
+    char next;
+    char screen;
+
+    Navigation();
+    Navigation( String l, char c, char n, char s );
+};
+
+
+Navigation::Navigation( String l, char c, char n, char s )
+{
+    this->label = l;
+    this->code = c;
+    this->next = n;
+    this->screen = s;
+}
+
+Navigation::Navigation()
+{}
+
+Navigation *navigation[ 16 ];
+
+void initNavigation()
+{
+    navigation[ 0 ] = new Navigation( "Card", 104, 1, SCREEN_1 );
+    navigation[ 1 ] = new Navigation( "Web", 105, 2, SCREEN_1 );
+    navigation[ 2 ] = new Navigation( "Config", 110, 3, SCREEN_1 );
+    navigation[ 3 ] = new Navigation( "About", 115, 0, SCREEN_1 );
+
+    navigation[ 4 ] = new Navigation( "Back", 100, 4, SCREEN_2 );
+    
+    navigation[ 5 ] = new Navigation( "Back", 100, 6, SCREEN_3 );
+    navigation[ 6 ] = new Navigation( "Fetch One", 1, 7, SCREEN_3 );
+    navigation[ 7 ] = new Navigation( "Fetch Two", 2, 8, SCREEN_3 );
+    navigation[ 8 ] = new Navigation( "Fetch Three", 3, 9, SCREEN_3 );
+    navigation[ 9 ] = new Navigation( "Fetch Four", 4, 5, SCREEN_3 );
+
+    navigation[ 10 ] = new Navigation( "Back", 100, 11, SCREEN_4 );
+    navigation[ 11 ] = new Navigation( "115200 bps", 5, 12, SCREEN_4 );
+    navigation[ 12 ] = new Navigation( "57600 bps", 6, 13, SCREEN_4 );
+    navigation[ 13 ] = new Navigation( "19200 bps", 7, 14, SCREEN_4 );
+    navigation[ 14 ] = new Navigation( "9600 bps", 8, 10, SCREEN_4 );
+
+    navigation[ 15 ] = new Navigation( "Close About", 100, 15, SCREEN_5 );
+}
+
+
 String menu[ MENU_SIZE ] = {
     "Card", "Web", "Config", "About"
 };
 
+
 int current = 0;
+int screen = SCREEN_1;
+
 
 void nextMenu()
 {
-    current = ( current + 1 ) % MENU_SIZE;
+    // current = ( current + 1 ) % MENU_SIZE;
+    current = navigation[ current ]->next;
+    Serial.print( "\tnavigation :: " );
+    Serial.println( current );
 }
 
 
 void selectMenu()
 {
-    Serial.println( menu[ current ] );
+    char code = navigation[ current ]->code;
+
+    Serial.print( "selectMenu :: " );
+    Serial.println( navigation[ current ]->label );
+
+    if( code >= 100 )
+    {
+        current = code - 100;
+        screen = navigation[ current ]->screen;
+        chooseScreen();
+        return;
+    }
+
+    switch( navigation[ current ]->code )
+    {
+        case 1:
+        case 2:
+        case 3: 
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        {
+            break;
+        }
+        default:
+            // no op
+            break;
+    }
+
+    Serial.print( screen );
+    Serial.print( " :: " );
+    Serial.println( navigation[ current ]->label );
 }
+
+
+void chooseScreen()
+{
+    switch( navigation[ current ]->screen )
+    {
+        case SCREEN_1:
+        {
+            menuScreen();
+            break;
+        }
+        case SCREEN_2:
+        {
+            cardScreen();
+            break;
+        }
+        case SCREEN_3:
+        {
+            menuScreen();
+            break;
+        }
+        case SCREEN_4:
+        {
+            menuScreen();
+            break;
+        }
+        case SCREEN_5:
+        {
+            aboutScreen();
+            break;
+        }
+    }
+}
+
 
 void menuScreen()
 {
@@ -688,33 +834,103 @@ void menuScreen()
     display.setFont( &FreeSansBold18pt7b );
     display.getTextBounds( MENU_5_EM, 0, 0, &tbx, &tby, &tbw, &tbh );
 
-    display.setPartialWindow( 0, 0, tbw + 16, 5 * tbh + 12 );
+    display.setPartialWindow( 0, 0, display.width(), display.height() );
 
     display.firstPage();
 
     do 
     {
-        for( int i = 0; i < 4; i ++ )
+        int i = 0;
+        for( int index = 0; index < 16; index ++ )
         {
-            display.setCursor( 4, ( i + 1 ) * ( tbh + 8 ) );
-
-            if( i == current )
+            if( navigation[ index ]->screen == screen )
             {
-                display.fillRect( 0, i * ( tbh + 8 ) + 4, tbw + 16, tbh + 12, GxEPD_BLACK );
-                display.setTextColor( GxEPD_WHITE, GxEPD_BLACK );    
-            }
-            else
-            {
-                display.setTextColor( GxEPD_BLACK, GxEPD_WHITE );    
-            }
+                display.setCursor( 4, ( i + 1 ) * ( tbh + 8 ) );
 
-            display.println( menu[ i ] );
-            yield();
+                if( index == current )
+                {
+                    display.fillRect( 0, i * ( tbh + 8 ) + 4, tbw + 16, tbh + 12, GxEPD_BLACK );
+                    display.setTextColor( GxEPD_WHITE, GxEPD_BLACK );    
+                }
+                else
+                {
+                    display.setTextColor( GxEPD_BLACK, GxEPD_WHITE );    
+                }
+
+                display.println( navigation[ index ]->label );
+                i ++;
+                yield();
+            }
         }
     }
     while ( display.nextPage() );    // flashing
 }
 
+
+void cardScreen()
+{
+    int16_t tbx, tby; 
+    uint16_t tbw, tbh;
+
+    display.setTextColor( GxEPD_BLACK, GxEPD_WHITE );    
+    display.setFont( &FreeSansBold18pt7b );
+    display.getTextBounds( "MMMMMMMM", 0, 0, &tbx, &tby, &tbw, &tbh );
+
+    display.setPartialWindow( 0, 0, display.width(), display.height() );
+
+    display.firstPage();
+
+    do 
+    {
+        display.setCursor( 4, tbh + 8 );
+        display.println( "Card" );
+    }
+    while ( display.nextPage() );    // flashing
+}
+
+
+void configScreen()
+{
+    int16_t tbx, tby; 
+    uint16_t tbw, tbh;
+
+    display.setTextColor( GxEPD_BLACK, GxEPD_WHITE );    
+    display.setFont( &FreeSansBold18pt7b );
+    display.getTextBounds( "MMMMMMMMMMM", 0, 0, &tbx, &tby, &tbw, &tbh );
+
+    display.setPartialWindow( 0, 0, display.width(), display.height() );
+
+    display.firstPage();
+
+    do 
+    {
+        display.setCursor( 4, tbh + 8 );
+        display.println( "Configure" );
+    }
+    while ( display.nextPage() );    // flashing
+}
+
+
+void aboutScreen()
+{
+    int16_t tbx, tby; 
+    uint16_t tbw, tbh;
+
+    display.setTextColor( GxEPD_BLACK, GxEPD_WHITE );    
+    display.setFont( &FreeSansBold18pt7b );
+    display.getTextBounds( "MMMMMMMMMM", 0, 0, &tbx, &tby, &tbw, &tbh );
+
+    display.setPartialWindow( 0, 0, display.width(), display.height() );
+
+    display.firstPage();
+
+    do 
+    {
+        display.setCursor( 4, tbh + 8 );
+        display.println( "About CodeCard" );
+    }
+    while ( display.nextPage() );    // flashing
+}
 
 void defaultScreen()
 {  
