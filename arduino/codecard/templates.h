@@ -1,3 +1,4 @@
+#include "gfxfont.h"
 #include <cstdlib>
 #include "GxEPD2_EPD.h"
 
@@ -126,7 +127,8 @@ void drawBackground(int x, int y, String backgroundImage, long color){
 */
 
 /*
-void drawBadge(int x, int y, int radius, String badge, long color) {
+void drawBadge( int x, int y, int radius, String badge, long color ) 
+{
     int circleColor = GxEPD_BLACK;
     int badgeText = GxEPD_WHITE;
 
@@ -172,9 +174,110 @@ void drawBadge(int x, int y, int radius, String badge, long color) {
 
 }
 */
+typedef struct Point
+{
+    int x, y;
+} Point;
 
+
+class Template 
+{
+    int backgroundColor = GxEPD_WHITE;
+    int textColor = GxEPD_BLACK;
+
+    Point titleLoc;
+    GFXfont * titleFont;
+
+    Point subTitleLoc;
+    GFXfont *subTitleFont;
+
+    Point bodyLoc;
+    GFXfont *bodyFont;
+
+    public:
+
+    Template();
+    Template( Point tLoc, GFXfont *tFont, Point stLoc, GFXfont *stFont, Point bLoc, GFXfont *bFont );
+    Template( int bgColor, int tColor, Point tLoc, GFXfont *tFont, Point stLoc, GFXfont *stFont, Point bLoc, GFXfont *bFont );
+
+    void display( String);
+    void drawBadge( int x, int y, int radius, String badge, long color );
+    void drawIcon64( int x, int y, String icon, long color );
+
+}
+
+
+Template::Template()
+{
+    this->titleFont = &FreeSansBold12pt7b;
+
+    this->subTitleFont = &FreeSans9pt7b;
+
+    this->bodyFont = &FreeSans9pt7b;
+}
+
+
+Template::Template( Point tLoc, GFXfont *tFont, Point stLoc, GFXfont *stFont, Point bLoc, GFXfont *bFont )
+{
+}
+
+Template::Template( int bgColor, int tColor, Point tLoc, GFXfont *tFont, Point stLoc, GFXfont *stFont, Point bLoc, GFXfont *bFont );
+{
+
+}
+
+
+void Template::drawBadge( int x, int y, int radius, String badge, long color )
+{
+
+}
+
+void Template::drawIcon64( int x, int y, String icon, long color )
+{
+
+}
+
+void Template::display( String title, String subtitle, String body, String icon, String badge, String fingerprint )
+{
+    display.setFullWindow();
+    display.firstPage();
+    
+    do {
+        display.fillScreen( this->backgroundColor );
+        display.setTextColor( this->textColor );  
+
+        if ( badge != "" ) 
+        {
+            this->drawBadge( 0, 0, 32, badge, this->backgroundColor);  
+        } 
+        else if( icon != "" && this->icon.indexOf( "http") == -1 && badge == "" ) 
+        {
+            this->drawIcon64( 0, 0, icon, this->textColor );
+        }
+        
+        // title
+        display.setFont( this->titleFont );  
+        display.setCursor( 72, 25 );
+        display.println( title.substring( 0, 16 ) );  
+    
+        // subtitle 
+        display.setFont( this->subTitleFont );
+        display.setCursor( 73, 45 );
+        display.println( subtitle.substring( 0, 20 ) );
+    
+        // body
+        display.setFont( this->bodyFont );
+        display.setCursor( 0, 80 );
+        display.println( body.substring( 0, 170 ) );
+    }
+    while( display.nextPage() );
+
+    // if (icon != "" && icon.indexOf("http") > -1 && badge == ""){
+    //     imageFromUrl(icon, 0, 0, fingerprint , false);
+    // }
+        
+}
 /*
-
 void template1(String title, String subtitle, String body, String icon, String badge, String backgroundColor, String fingerprint) {
   long bgColor = GxEPD_WHITE;
   long txtColor = GxEPD_BLACK;
