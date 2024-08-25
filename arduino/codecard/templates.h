@@ -27,18 +27,23 @@ void defaultScreen();
 
 
 
+// prototypes
+
+void imageFromUrl( String url, int16_t x, int16_t y, String fingerprint = "", bool with_color = true );
+
+
+// definitions
 
 /*
-     void imageFromUrl(String url, int16_t x, int16_t y, String fingerprint = "", bool with_color = true);
 */
-
-/*
-void drawBarcode39(int x, int y, int width, int height, int pitch, String barcode){
+void drawBarcode39(int x, int y, int width, int height, int pitch, String barcode)
+{
   int c = 0;
   display.fillRect(x, y, width, height, GxEPD_WHITE);
   c = (pitch * 10);
 
-  for(int i = 0; i < barcode.length(); i++){
+  for( uint i = 0; i < barcode.length(); i++ )
+  {
      String binCode = getBinCode(barcode.charAt(i));
      bool bk = true;
      for(int j = 0; j < 9; j++){
@@ -64,69 +69,77 @@ void drawBarcode39(int x, int y, int width, int height, int pitch, String barcod
   }
   
 }
+/*
 */
 
 /*
+*/
 void drawIcon64(int x, int y, String icon, long color){
   
-  if (icon == "01d" || icon == "01n") { display.drawInvertedBitmap(x, y, weather01, 64, 64, color); return; }
-  if (icon == "02d" || icon == "02n") { display.drawInvertedBitmap(x, y, weather02, 64, 64, color); return; }
-  if (icon == "03d" || icon == "03n") { display.drawInvertedBitmap(x, y, weather03, 64, 64, color); return; }
-  if (icon == "04d" || icon == "04n") { display.drawInvertedBitmap(x, y, weather04, 64, 64, color); return; }
-  if (icon == "09d" || icon == "09n") { display.drawInvertedBitmap(x, y, weather09, 64, 64, color); return; }
-  if (icon == "10d" || icon == "10n") { display.drawInvertedBitmap(x, y, weather10, 64, 64, color); return; }
-  if (icon == "11d" || icon == "11n") { display.drawInvertedBitmap(x, y, weather11, 64, 64, color); return; }
-  if (icon == "13d" || icon == "13n") { display.drawInvertedBitmap(x, y, weather13, 64, 64, color); return; }
-  if (icon == "50d" || icon == "50n") { display.drawInvertedBitmap(x, y, weather50, 64, 64, color); return; }
-  if (icon == "twitter") { display.drawInvertedBitmap(x, y, twitter64, 64, 64, color); return; }
-  if (icon == "mail") { display.drawInvertedBitmap(x, y, mail64, 64, 64, color); return; } 
-  if (icon == "fail") { display.drawInvertedBitmap(x, y, fail64, 64, 64, color); return; }   
-  if (icon == "ace") { display.drawInvertedBitmap(x, y, ace64, 64, 64, color); return; } 
-  if (icon == "duke") { display.drawInvertedBitmap(x, y, duke64, 64, 64, color); return; }  
-  if (icon == "oracle") { display.drawInvertedBitmap(x, y, oracle64, 64, 64, color); return; } 
-  if (icon == "champion") { display.drawInvertedBitmap(x, y, champion64, 64, 64, color); return; } 
-  if (icon == "jduchess") { display.drawInvertedBitmap(x, y, jduchess64, 64, 64, color); return; } 
+//   if (icon == "01d" || icon == "01n") { display.drawInvertedBitmap(x, y, weather01, 64, 64, color); return; }
+//   if (icon == "02d" || icon == "02n") { display.drawInvertedBitmap(x, y, weather02, 64, 64, color); return; }
+//   if (icon == "03d" || icon == "03n") { display.drawInvertedBitmap(x, y, weather03, 64, 64, color); return; }
+//   if (icon == "04d" || icon == "04n") { display.drawInvertedBitmap(x, y, weather04, 64, 64, color); return; }
+//   if (icon == "09d" || icon == "09n") { display.drawInvertedBitmap(x, y, weather09, 64, 64, color); return; }
+//   if (icon == "10d" || icon == "10n") { display.drawInvertedBitmap(x, y, weather10, 64, 64, color); return; }
+//   if (icon == "11d" || icon == "11n") { display.drawInvertedBitmap(x, y, weather11, 64, 64, color); return; }
+//   if (icon == "13d" || icon == "13n") { display.drawInvertedBitmap(x, y, weather13, 64, 64, color); return; }
+//   if (icon == "50d" || icon == "50n") { display.drawInvertedBitmap(x, y, weather50, 64, 64, color); return; }
+//   if (icon == "twitter") { display.drawInvertedBitmap(x, y, twitter64, 64, 64, color); return; }
+//   if (icon == "mail") { display.drawInvertedBitmap(x, y, mail64, 64, 64, color); return; } 
+//   if (icon == "fail") { display.drawInvertedBitmap(x, y, fail64, 64, 64, color); return; }   
+//   if (icon == "ace") { display.drawInvertedBitmap(x, y, ace64, 64, 64, color); return; } 
+//   if (icon == "duke") { display.drawInvertedBitmap(x, y, duke64, 64, 64, color); return; }  
+//   if (icon == "oracle") { display.drawInvertedBitmap(x, y, oracle64, 64, 64, color); return; } 
+//   if (icon == "champion") { display.drawInvertedBitmap(x, y, champion64, 64, 64, color); return; } 
+//   if (icon == "jduchess") { display.drawInvertedBitmap(x, y, jduchess64, 64, 64, color); return; } 
 
-  if (icon == "db") { display.drawInvertedBitmap(x, y, db64, 64, 64, color); return; }
-  if (icon == "java") { display.drawInvertedBitmap(x, y, java64, 64, 64, color); return; } 
-  if (icon == "containers") { display.drawInvertedBitmap(x, y, containers64, 64, 64, color); return; }   
-  if (icon == "microservices") { display.drawInvertedBitmap(x, y, microservices64, 64, 64, color); return; } 
-  if (icon == "opensource") { display.drawInvertedBitmap(x, y, opensource64, 64, 64, color); return; }  
-  if (icon == "chatbots") { display.drawInvertedBitmap(x, y, chatbots64, 64, 64, color); return; } 
-  if (icon == "blockchain") { display.drawInvertedBitmap(x, y, blockchain64, 64, 64, color); return; }   
-  if (icon == "javascript") { display.drawInvertedBitmap(x, y, javascript64, 64, 64, color); return; }  
-  if (icon == "nighthacker") { display.drawInvertedBitmap(x, y, nighthacker64, 64, 64, color); return; }   
-  if (icon == "wifi") { display.drawInvertedBitmap(x, y, wifi64, 64, 64, color); return; } 
+//   if (icon == "db") { display.drawInvertedBitmap(x, y, db64, 64, 64, color); return; }
+//   if (icon == "java") { display.drawInvertedBitmap(x, y, java64, 64, 64, color); return; } 
+//   if (icon == "containers") { display.drawInvertedBitmap(x, y, containers64, 64, 64, color); return; }   
+//   if (icon == "microservices") { display.drawInvertedBitmap(x, y, microservices64, 64, 64, color); return; } 
+//   if (icon == "opensource") { display.drawInvertedBitmap(x, y, opensource64, 64, 64, color); return; }  
+//   if (icon == "chatbots") { display.drawInvertedBitmap(x, y, chatbots64, 64, 64, color); return; } 
+//   if (icon == "blockchain") { display.drawInvertedBitmap(x, y, blockchain64, 64, 64, color); return; }   
+//   if (icon == "javascript") { display.drawInvertedBitmap(x, y, javascript64, 64, 64, color); return; }  
+//   if (icon == "nighthacker") { display.drawInvertedBitmap(x, y, nighthacker64, 64, 64, color); return; }   
+//   if (icon == "wifi") { display.drawInvertedBitmap(x, y, wifi64, 64, 64, color); return; } 
 }
+/*
 */
 
 /*
+*/
 void drawIcon128(int x, int y, String icon, long color){
-  if (icon == "oracle") { display.drawInvertedBitmap(x, y, oracle128, 128, 128, color); return; }
-  if (icon == "champion") { display.drawInvertedBitmap(x, y, champion128, 128, 128, color); return; }  
-  if (icon == "jduchess") { display.drawInvertedBitmap(x, y, jduchess128, 128, 128, color); return; }  
+//   if (icon == "oracle") { display.drawInvertedBitmap(x, y, oracle128, 128, 128, color); return; }
+//   if (icon == "champion") { display.drawInvertedBitmap(x, y, champion128, 128, 128, color); return; }  
+//   if (icon == "jduchess") { display.drawInvertedBitmap(x, y, jduchess128, 128, 128, color); return; }  
 
-  if (icon == "db") { display.drawInvertedBitmap(x, y, db128, 128, 128, color); return; }
-  if (icon == "java") { display.drawInvertedBitmap(x, y, java128, 128, 128, color); return; } 
-  if (icon == "containers") { display.drawInvertedBitmap(x, y, containers128, 128, 128, color); return; }   
-  if (icon == "microservices") { display.drawInvertedBitmap(x, y, microservices128, 128, 128, color); return; } 
-  if (icon == "opensource") { display.drawInvertedBitmap(x, y, opensource128, 128, 128, color); return; }  
-  if (icon == "chatbots") { display.drawInvertedBitmap(x, y, chatbots128, 128, 128, color); return; } 
-  if (icon == "blockchain") { display.drawInvertedBitmap(x, y, blockchain128, 128, 128, color); return; }   
-  if (icon == "javascript") { display.drawInvertedBitmap(x, y, javascript128, 128, 128, color); return; } 
-  if (icon == "nighthacker") { display.drawInvertedBitmap(x, y, nighthacker128, 128, 128, color); return; } 
-  if (icon == "wifi") { display.drawInvertedBitmap(x, y, wifi128, 128, 128, color); return; } 
+//   if (icon == "db") { display.drawInvertedBitmap(x, y, db128, 128, 128, color); return; }
+//   if (icon == "java") { display.drawInvertedBitmap(x, y, java128, 128, 128, color); return; } 
+//   if (icon == "containers") { display.drawInvertedBitmap(x, y, containers128, 128, 128, color); return; }   
+//   if (icon == "microservices") { display.drawInvertedBitmap(x, y, microservices128, 128, 128, color); return; } 
+//   if (icon == "opensource") { display.drawInvertedBitmap(x, y, opensource128, 128, 128, color); return; }  
+//   if (icon == "chatbots") { display.drawInvertedBitmap(x, y, chatbots128, 128, 128, color); return; } 
+//   if (icon == "blockchain") { display.drawInvertedBitmap(x, y, blockchain128, 128, 128, color); return; }   
+//   if (icon == "javascript") { display.drawInvertedBitmap(x, y, javascript128, 128, 128, color); return; } 
+//   if (icon == "nighthacker") { display.drawInvertedBitmap(x, y, nighthacker128, 128, 128, color); return; } 
+//   if (icon == "wifi") { display.drawInvertedBitmap(x, y, wifi128, 128, 128, color); return; } 
 }
+/*
 */
 
 /*
+*/
 void drawBackground(int x, int y, String backgroundImage, long color){ 
-  if (backgroundImage == "codeone") { display.drawInvertedBitmap(x, y, codeone264, display.width(), display.height(), color); return; } 
-  if (backgroundImage == "oracle") { display.drawInvertedBitmap(x, y, oracle264, display.width(), display.height(), color); return; } 
+//   if (backgroundImage == "codeone") { display.drawInvertedBitmap(x, y, codeone264, display.width(), display.height(), color); return; } 
+//   if (backgroundImage == "oracle") { display.drawInvertedBitmap(x, y, oracle264, display.width(), display.height(), color); return; } 
 }
+/*
 */
 
 /*
+*/
 void drawBadge( int x, int y, int radius, String badge, long color ) 
 {
     int circleColor = GxEPD_BLACK;
@@ -173,7 +186,10 @@ void drawBadge( int x, int y, int radius, String badge, long color )
  
 
 }
+/*
 */
+
+
 typedef struct Point
 {
     int x, y;
@@ -185,14 +201,14 @@ class Template
     int backgroundColor = GxEPD_WHITE;
     int textColor = GxEPD_BLACK;
 
-    Point titleLoc;
-    GFXfont * titleFont;
+    Point titleLoc = { 72, 25 };
+    const GFXfont * titleFont;
 
-    Point subTitleLoc;
-    GFXfont *subTitleFont;
+    Point subTitleLoc = { 73, 45 };
+    const GFXfont *subTitleFont;
 
-    Point bodyLoc;
-    GFXfont *bodyFont;
+    Point bodyLoc = { 0, 80 };
+    const GFXfont *bodyFont;
 
     public:
 
@@ -200,11 +216,11 @@ class Template
     Template( Point tLoc, GFXfont *tFont, Point stLoc, GFXfont *stFont, Point bLoc, GFXfont *bFont );
     Template( int bgColor, int tColor, Point tLoc, GFXfont *tFont, Point stLoc, GFXfont *stFont, Point bLoc, GFXfont *bFont );
 
-    void display( String);
+    void render( String title, String subtitle, String body, String icon, String badge, String fingerprint );
     void drawBadge( int x, int y, int radius, String badge, long color );
     void drawIcon64( int x, int y, String icon, long color );
 
-}
+};
 
 
 Template::Template()
@@ -221,7 +237,7 @@ Template::Template( Point tLoc, GFXfont *tFont, Point stLoc, GFXfont *stFont, Po
 {
 }
 
-Template::Template( int bgColor, int tColor, Point tLoc, GFXfont *tFont, Point stLoc, GFXfont *stFont, Point bLoc, GFXfont *bFont );
+Template::Template( int bgColor, int tColor, Point tLoc, GFXfont *tFont, Point stLoc, GFXfont *stFont, Point bLoc, GFXfont *bFont )
 {
 
 }
@@ -237,7 +253,7 @@ void Template::drawIcon64( int x, int y, String icon, long color )
 
 }
 
-void Template::display( String title, String subtitle, String body, String icon, String badge, String fingerprint )
+void Template::render( String title, String subtitle, String body, String icon, String badge, String fingerprint )
 {
     display.setFullWindow();
     display.firstPage();
@@ -250,24 +266,24 @@ void Template::display( String title, String subtitle, String body, String icon,
         {
             this->drawBadge( 0, 0, 32, badge, this->backgroundColor);  
         } 
-        else if( icon != "" && this->icon.indexOf( "http") == -1 && badge == "" ) 
+        else if( icon != "" && icon.indexOf( "http") == -1 && badge == "" ) 
         {
             this->drawIcon64( 0, 0, icon, this->textColor );
         }
         
         // title
         display.setFont( this->titleFont );  
-        display.setCursor( 72, 25 );
+        display.setCursor( titleLoc.x, titleLoc.y );
         display.println( title.substring( 0, 16 ) );  
     
         // subtitle 
         display.setFont( this->subTitleFont );
-        display.setCursor( 73, 45 );
+        display.setCursor( this->subTitleLoc.x, this->subTitleLoc.y );
         display.println( subtitle.substring( 0, 20 ) );
     
         // body
         display.setFont( this->bodyFont );
-        display.setCursor( 0, 80 );
+        display.setCursor( this->bodyLoc.x, this->bodyLoc.y );
         display.println( body.substring( 0, 170 ) );
     }
     while( display.nextPage() );
@@ -277,52 +293,70 @@ void Template::display( String title, String subtitle, String body, String icon,
     // }
         
 }
+
+
 /*
-void template1(String title, String subtitle, String body, String icon, String badge, String backgroundColor, String fingerprint) {
-  long bgColor = GxEPD_WHITE;
-  long txtColor = GxEPD_BLACK;
-  
-  display.setFullWindow();
-  display.firstPage();
+*/
+void template1( String title, String subtitle, String body, String icon, String badge, String backgroundColor, String fingerprint) 
+{
+    long bgColor = GxEPD_WHITE;
+    long txtColor = GxEPD_BLACK;
+    uint8_t* iconBuffer = NULL;
+    
+    display.setFullWindow();
+    display.firstPage();
 
-  if (backgroundColor == "black"){
-    bgColor = GxEPD_BLACK;
-    txtColor = GxEPD_WHITE;
-  } 
+    if (backgroundColor == "black")
+    {
+        bgColor = GxEPD_BLACK;
+        txtColor = GxEPD_WHITE;
+    } 
   
-  do {
-    display.fillScreen(bgColor);
-    display.setTextColor(txtColor);  
-
-    if (badge != "") {
-      drawBadge(0, 0, 32, badge, bgColor);  
-    } else if (icon != "" && icon.indexOf("http") == -1 && badge == "") {
-      drawIcon64(0, 0, icon, txtColor);
+    if (icon != "" && icon.indexOf("http") > -1 && badge == "" )
+    {
+Serial.println( "template1 :: call to imageFromUrl()" );
+        yield();
+        iconBuffer = fetchImageFromUrl( icon, 0, 0, fingerprint , false, 3 );
     }
-    
-    // title
-    display.setFont(&FreeSansBold12pt7b);  
-    display.setCursor(72, 25);
-    display.println(title.substring(0, 16));  
-  
-      // subtitle 
-    display.setFont(&FreeSans9pt7b);
-    display.setCursor(73, 45);
-    display.println(subtitle.substring(0, 20));
-  
-    // body
-    display.setFont(&FreeSans9pt7b);
-    display.setCursor(0, 80);
-    display.println(body.substring(0, 170));
-    
-  }
-  while (display.nextPage());
 
-  if (icon != "" && icon.indexOf("http") > -1 && badge == ""){
-    imageFromUrl(icon, 0, 0, fingerprint , false);
-  }
+    do {
+        display.fillScreen(bgColor);
+        display.setTextColor(txtColor);  
+
+        // if (badge != "") {
+        //     drawBadge(0, 0, 32, badge, bgColor);  
+        // } else if (icon != "" && icon.indexOf("http") == -1 && badge == "") {
+        //     drawIcon64(0, 0, icon, txtColor);
+        // }
+        
+        if( iconBuffer != NULL )
+        {
+            display.drawBitmap( 0, 0, iconBuffer, 64, 64, GxEPD_BLACK );
+        }
+        // title
+        display.setFont(&FreeSansBold12pt7b);  
+        display.setCursor(72, 25);
+        display.println(title.substring(0, 16));  
     
+        // subtitle 
+        display.setFont(&FreeSans9pt7b);
+        display.setCursor(73, 45);
+        display.println(subtitle.substring(0, 20));
+    
+        // body
+        display.setFont(&FreeSans9pt7b);
+        display.setCursor(0, 80);
+        display.println(body.substring(0, 170));
+        
+    }
+    while ( display.nextPage() );
+
+    if( iconBuffer != NULL )
+    {
+        free( iconBuffer );
+    }
 }
+/*
 */
 
 /*
@@ -907,7 +941,8 @@ void chooseScreen()
         }
         case SCREEN_2:
         {
-            cardScreen();
+            pushButton( "a", 1 );
+//            cardScreen();
             break;
         }
         case SCREEN_3:

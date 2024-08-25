@@ -3,7 +3,8 @@
   
 */
 
-String httpRequest(WiFiClient& client, String httpMethod, String url, String host, String btnLabel, int btnFunction){
+String httpRequest(WiFiClient& client, String httpMethod, String url, String host, String btnLabel, int btnFunction)
+{
   
   String mac = WiFi.macAddress();
   mac.replace(":", "");
@@ -21,6 +22,7 @@ String httpRequest(WiFiClient& client, String httpMethod, String url, String hos
                "Connection: close\r\n\r\n");
 
   unsigned long timeout = millis();
+
   while (client.available() == 0) {
     if (millis() - timeout > 5000) {
       Serial.println(F("  Request timeout!"));
@@ -43,7 +45,7 @@ String httpRequest(WiFiClient& client, String httpMethod, String url, String hos
 //  if (strcmp(status, "HTTP/1.0 200 OK") != 0) {
 //    Serial.print(F("  Unexpected response: "));
 //    Serial.println(status);
-//    client.stop();
+//    client.stop(); 
 //    return "";
 //  }
     
@@ -236,69 +238,204 @@ void httpsImage(String host, int port, String url, int16_t x, int16_t y, String 
     }
   }
   if (!connection_ok) return;
-//   displayImageFromUrl(secureClient, x, y, connection_ok, with_color);
+  displayImageFromUrl(secureClient, x, y, connection_ok, with_color);
 }
 
 
-void httpImage(String host, int port, String url, int16_t x, int16_t y, bool with_color) {
+void httpImage( String host, int port, String url, int16_t x, int16_t y, bool with_color, int rotation ) 
+{ 
+Serial.println( "httpImage" );
+
+    WiFiClient client;
+    bool connection_ok = false;
   
-  WiFiClient client;
-  bool connection_ok = false;
-  
-  if ((x >= display.width()) || (y >= display.height())) return;
+    if (( x >= display.width() ) || ( y >= display.height() ) ) return;
 
-  Serial.println(F("Request:"));
-  Serial.print(F("  host: "));
-  Serial.println(host);
-  Serial.print(F("  port: "));
-  Serial.println(port);  
-  Serial.print(F("  url: "));
-  Serial.println(url); 
-  Serial.println(F("  method: GET"));
+    Serial.println(F("Request:"));
+    Serial.print(F("  host: "));
+    Serial.println(host);
+    Serial.print(F("  port: "));
+    Serial.println(port);  
+    Serial.print(F("  url: "));
+    Serial.println(url); 
+    Serial.println(F("  method: GET"));
 
-  if (!client.connect(host, port))
-  {
-    Serial.println("  Connection failed");
-    return;
-  }
+    if( ! client.connect( host, port ) )
+    {
+            Serial.println("  Connection failed");
+            return;
+    }
 
-  client.print(String("GET ") + url + " HTTP/1.1\r\n" +
+    client.print( String("GET ") + url + " HTTP/1.1\r\n" +
                "Host: " + host + "\r\n" +
                "User-Agent: CodeCard\r\n" +
                "Connection: close\r\n\r\n");
-  //Serial.println("request sent");
-  while (client.connected())
-  {
-    String line = client.readStringUntil('\n');
-    if (!connection_ok)
+
+Serial.println("request sent");
+
+    unsigned long timeout = millis();
+
+    while (client.available() == 0) 
     {
-      connection_ok = line.startsWith("HTTP/1.1 200 OK"); // || line.startsWith("HTTP/1.1 30");
-      if (connection_ok) Serial.println(line);
-      //if (!connection_ok) Serial.println(line);
-    }
-    if (!connection_ok) Serial.println(line);
-    //Serial.println(line);
-    if (line == "\r")
+        if (millis() - timeout > 5000) 
+        {
+            Serial.println(F("  Request timeout!"));
+            Serial.println(F(">>>"));
+            return;
+        }
+    }       
+                                
+    int result = client.println();
+
+    if (client.println() != 0) 
     {
-      //Serial.println("headers received");
-      break;
+        Serial.println(F("  Failed to send request"));
+        Serial.println( result );
+        Serial.println(F(">>>"));   
+        return;
     }
-  }
-  if (!connection_ok) return;
-//   displayImageFromUrl(client, x, y, connection_ok, with_color);
+
+
+    while ( client.available() )
+    {
+        String header = client.readStringUntil( '\n' );
+
+    Serial.println( "header :: " + header );
+
+        // if( ! connection_ok )
+        // {
+            // connection_ok = line.startsWith("HTTP/1.1 200 OK"); // || line.startsWith("HTTP/1.1 30");
+            // if (connection_ok) Serial.println(line);
+        //if (!connection_ok) Serial.println(line);
+        // }
+
+        // if (!connection_ok) Serial.println(line);
+    // Serial.println( headers );
+        if( header == "\r" )
+        {
+            Serial.println("headers received");
+            break;
+        }
+    }
+    // if (!connection_ok) return;
+    displayImageFromUrl( client, x, y, connection_ok, with_color, rotation );
 }
 
-void imageFromUrl(String url, int16_t x, int16_t y, String fingerprint, bool with_color){
-  String protocol = parseValue(url, '/', 0);
-  String host = parseValue(url, '/', 2);
-  String portString = parseValue(host, ':', 1) ;
-  host = parseValue(host, ':', 0);
+
+void httpImage( String host, int port, String url, int16_t x, int16_t y, bool with_color ) 
+{
+    httpImage( host, port, url, x, y, with_color, 0 );
+}
+
+
+uint8_t* fetchHttpImage( String host, int port, String url, int16_t x, int16_t y, bool with_color, int rotation ) 
+{ 
+Serial.println( "httpImage" );
+
+    WiFiClient client;
+    bool connection_ok = false;
   
-  if (protocol == "https:") {
-    int port = (portString.length() != 0) ? portString.toInt() : 443;
-    httpsImage(host, port, url, x, y, fingerprint, with_color);
-  } else {
-    int port = (portString.length() != 0) ? portString.toInt() : 80;
-    httpImage(host, port, url, x, y, with_color);
-  }
+    if (( x >= display.width() ) || ( y >= display.height() ) ) return NULL;
+
+    Serial.println(F("Request:"));
+    Serial.print(F("  host: "));
+    Serial.println(host);
+    Serial.print(F("  port: "));
+    Serial.println(port);  
+    Serial.print(F("  url: "));
+    Serial.println(url); 
+    Serial.println(F("  method: GET"));
+
+    if( ! client.connect( host, port ) )
+    {
+            Serial.println("  Connection failed");
+            return NULL;
+    }
+
+    client.print( String("GET ") + url + " HTTP/1.1\r\n" +
+               "Host: " + host + "\r\n" +
+               "User-Agent: CodeCard\r\n" +
+               "Connection: close\r\n\r\n");
+
+Serial.println("request sent");
+
+    unsigned long timeout = millis();
+
+    while (client.available() == 0) 
+    {
+        if (millis() - timeout > 5000) 
+        {
+            Serial.println(F("  Request timeout!"));
+            Serial.println(F(">>>"));
+            return NULL;
+        }
+    }       
+                                
+    int result = client.println();
+
+    if (client.println() != 0) 
+    {
+        Serial.println(F("  Failed to send request"));
+        Serial.println( result );
+        Serial.println(F(">>>"));   
+        return NULL;
+    }
+
+
+    while ( client.available() )
+    {
+        String header = client.readStringUntil( '\n' );
+
+    Serial.println( "header :: " + header );
+
+        if( header == "\r" )
+        {
+            Serial.println("headers received");
+            break;
+        }
+    }
+    // if (!connection_ok) return;
+    return fetchImageFromClient( client, x, y, connection_ok, with_color, rotation );
+}
+
+
+void imageFromUrl( String url, int16_t x, int16_t y, String fingerprint, bool with_color, int rotation )
+{
+Serial.println( "imageFromUrl :: " + url );
+    String protocol = parseValue( url, '/', 0 );
+    String host = parseValue( url, '/', 2 );
+    String portString = parseValue( host, ':', 1 ) ;
+    host = parseValue( host, ':', 0 );
+    
+    if (protocol == "https:") {
+        int port = ( portString.length() != 0 ) ? portString.toInt() : 443;
+        httpsImage(host, port, url, x, y, fingerprint, with_color);
+    } else {
+        int port = ( portString.length() != 0 ) ? portString.toInt() : 80;
+        httpImage( host, port, url, x, y, with_color, rotation );
+    }
+}
+
+
+uint8_t* fetchImageFromUrl( String url, int16_t x, int16_t y, String fingerprint, bool with_color, int rotation )
+{
+Serial.println( "imageFromUrl :: " + url );
+    String protocol = parseValue( url, '/', 0 );
+    String host = parseValue( url, '/', 2 );
+    String portString = parseValue( host, ':', 1 ) ;
+    host = parseValue( host, ':', 0 );
+    
+    // if (protocol == "https:") {
+    //     int port = ( portString.length() != 0 ) ? portString.toInt() : 443;
+    //     httpsImage(host, port, url, x, y, fingerprint, with_color);
+    // } else {
+        int port = ( portString.length() != 0 ) ? portString.toInt() : 80;
+        return fetchHttpImage( host, port, url, x, y, with_color, rotation );
+    // }
+}
+
+
+void imageFromUrl( String url, int16_t x, int16_t y, String fingerprint, bool with_color )
+{
+    imageFromUrl( url, x, y, fingerprint, with_color, 0 );
 }

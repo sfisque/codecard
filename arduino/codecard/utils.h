@@ -116,23 +116,26 @@ uint32_t read32(WiFiClient& client)
   return result;
 }
 
-uint32_t skip(WiFiClient& client, int32_t bytes)
+uint32_t skip( WiFiClient& client, int32_t bytes )
 {
-  int32_t remain = bytes;
+  uint32_t remain = bytes;
   int16_t retries = 3;
   uint32_t chunk = 1024;
   if (chunk > sizeof(input_buffer)) chunk = sizeof(input_buffer);
   while (client.connected() && (remain > chunk))
   {
     // there seems an issue with long downloads on ESP8266
-    tryToWaitForAvailable(client, chunk);
+    tryToWaitForAvailable( client, chunk );
     uint32_t got = client.read(input_buffer, chunk);
     //Serial.print("skipped "); Serial.println(got);
     remain -= got;
     if ((0 == got) && (0 == --retries))
     {
-      Serial.print("Error on skip, got 0, skipped "); Serial.print(bytes - remain); Serial.print(" of "); Serial.println(bytes);
-      break; // don't hang forever (retries don't help)
+        Serial.print( "Error on skip, got 0, skipped "); 
+        Serial.print(bytes - remain); 
+        Serial.print(" of "); 
+        Serial.println(bytes);
+        break; // don't hang forever (retries don't help)
     }
   }
   if (client.connected() && (remain > 0) && (remain <= chunk))

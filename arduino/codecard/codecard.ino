@@ -27,6 +27,7 @@
 
 // These dependencies need to be loaeded in this specific sequence. 
 #include "config.h" // contains all dependencies includes and global variables
+#include "prototypes.h" // contains prototypes because the project is a mess
 #include "utils.h"
 #include "memory.h"
 #include "wifi.h"
@@ -55,7 +56,7 @@ void setup() {
     if (startTime > (100000 * 8)) { break; }
   }
   Serial.begin( BAUD_SPEED );
-  display.init(( /* BAUD_SPEED */ (uint32_t) 0, false, (uint16_t) 5, false ));
+  display.init( /* BAUD_SPEED */ (uint32_t) 0, false, (uint16_t) 5, false );
   display.setRotation(3);
 
   defaultScreen();

@@ -3,48 +3,52 @@
   
 */
 
-void help() {
-  Serial.println(F("***************************************************************************************"));
-  Serial.println("  " + String(projectName) + " v" + String(projectVersion));
-  Serial.println("  " + String(projectAuthor));
-  Serial.println("  " + String(projectSite)); 
-  Serial.println(F("***************************************************************************************"));
-  Serial.println(F("Commands:"));
-  Serial.println(F("  ls                Show all stored key/values"));
-  Serial.println(F("  help              Show this help"));  
-  Serial.println(F("  shortpress[a|b]   Simulate the press of a button")); 
-  Serial.println(F("  longpress[a|b]    Simulate the long press of a button"));  
-  Serial.println(F("  connect           Connect to wifi"));  
-  Serial.println(F("  disconnect        Disconnect wifi"));   
-  Serial.println(F("  restart           Restart wifi"));  
-  Serial.println(F("  status            Show wifi status"));
-  Serial.println(F("  home              Show home screen"));    
-  Serial.println(F("  reset             Reset to factory settings"));     
-  Serial.println();
-  Serial.println(F("Usage:"));
-  Serial.println(F("  Read saved key value:"));
-  Serial.println(F("    key"));
-  Serial.println(F("  Save new key value:")); 
-  Serial.println(F("    key=[value]"));
-  Serial.println();
-  Serial.println(F("Available keys:"));
-  Serial.print(F("  "));
-  for (int i=0; i < keysLen; i++) {
-    if (i == 8) {
-      Serial.println(F(""));
-      Serial.print(F("  "));
+void help() 
+{
+    Serial.println(F("***************************************************************************************"));
+    Serial.println("  " + String(projectName) + " v" + String(projectVersion));
+    Serial.println("  " + String(projectAuthor));
+    Serial.println("  " + String(projectSite)); 
+    Serial.println(F("***************************************************************************************"));
+    Serial.println(F("Commands:"));
+    Serial.println(F("  ls                Show all stored key/values"));
+    Serial.println(F("  help              Show this help"));  
+    Serial.println(F("  shortpress[a|b]   Simulate the press of a button")); 
+    Serial.println(F("  longpress[a|b]    Simulate the long press of a button"));  
+    Serial.println(F("  connect           Connect to wifi"));  
+    Serial.println(F("  disconnect        Disconnect wifi"));   
+    Serial.println(F("  restart           Restart wifi"));  
+    Serial.println(F("  status            Show wifi status"));
+    Serial.println(F("  home              Show home screen"));    
+    Serial.println(F("  reset             Reset to factory settings"));     
+    Serial.println();
+    Serial.println(F("Usage:"));
+    Serial.println(F("  Read saved key value:"));
+    Serial.println(F("    key"));
+    Serial.println(F("  Save new key value:")); 
+    Serial.println(F("    key=[value]"));
+    Serial.println();
+    Serial.println(F("Available keys:"));
+    Serial.print(F("  "));
+
+    for (int i=0; i < keysLen; i++ ) 
+    {
+        if (i == 8) {
+        Serial.println(F(""));
+        Serial.print(F("  "));
+        }
+        if( strncmp( "initalsetup", keys[i], 10 ) == 0 ) 
+        {
+            continue;
+        } 
+        Serial.print(keys[i]);
+        if (i != keysLen - 1) {
+        Serial.print(F(", "));
+        }
+        
     }
-    if( keys[i] == "initalsetup") {
-      continue;
-    } 
-    Serial.print(keys[i]);
-    if (i != keysLen - 1) {
-      Serial.print(F(", "));
-    }
-    
-  }
-  Serial.println(F(""));
-  Serial.println(F(">>>"));
+    Serial.println(F(""));
+    Serial.println(F(">>>"));
 }
 
 void showStatus() {
