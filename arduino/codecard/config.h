@@ -52,7 +52,7 @@ const char* projectSite = "developer.oracle.com/codecard";
 const char* defaultSSID = "CHANGE_TO_SSID";
 const char* defaultPassword = "CHANGE_TO_PASSWORD";
 const char* defaultUrl = "https://apex.oracle.com/pls/apex/appslab/functions/master";
-const char* defaultFingerprint = "01 92 1A 05 84 F5 36 14 85 E3 9C 87 93 4C D0 76 64 B1 CE 9D";
+const char* defaultFingerprint = "change to space delimited fingerprint";
 
 //char arrayToStore[100];
 const int maxValue = 200;
@@ -62,31 +62,35 @@ const int keysLen = 15;
 
 // Available keys
 const char* const keys[keysLen] PROGMEM = {
-  "ssid", 
-  "password", 
-  "buttona1", 
-  "buttona2", 
-  "buttonb1", 
-  "buttonb2", 
-  "fingerprinta1", 
-  "fingerprinta2", 
-  "fingerprintb1", 
-  "fingerprintb2", 
-  "methoda1", 
-  "methoda2", 
-  "methodb1", 
-  "methodb2", 
-  "initalsetup"
+    "ssid", 
+    "password", 
+    "buttona1", 
+    "buttona2", 
+    "buttonb1", 
+    "buttonb2", 
+    "fingerprinta1", 
+    "fingerprinta2", 
+    "fingerprintb1", 
+    "fingerprintb2", 
+    "methoda1", 
+    "methoda2", 
+    "methodb1", 
+    "methodb2", 
+    "initalsetup"
   };
 
 
+// set this dynamically
+static const uint16_t max_row_width = 300; // for up to 2.7" display plus some wiggle room
+
 // Wifi image settings  
-static const uint16_t input_buffer_pixels = 640; // may affect performance
-static const uint16_t max_row_width = 640; // for up to 7.5" display
-static const uint16_t max_palette_pixels = 256; // for depth <= 8
-uint8_t input_buffer[3 * input_buffer_pixels]; // up to depth 24
-uint8_t output_row_mono_buffer[max_row_width / 8]; // buffer for at least one row of b/w bits
-uint8_t output_row_color_buffer[max_row_width / 8]; // buffer for at least one row of color bits
-uint8_t mono_palette_buffer[max_palette_pixels / 8]; // palette buffer for depth <= 8 b/w
-uint8_t color_palette_buffer[max_palette_pixels / 8]; // palette buffer for depth <= 8 c/w
+// static const uint16_t input_buffer_pixels = 640; // may affect performance
+// static const uint16_t max_row_width = 640; // for up to 7.5" display
+// static const uint16_t max_palette_pixels = 256; // for depth <= 8
+
+// uint8_t input_buffer[ 3 * input_buffer_pixels ]; // up to depth 24
+// uint8_t output_row_mono_buffer[max_row_width / 8]; // buffer for at least one row of b/w bits
+// uint8_t output_row_color_buffer[max_row_width / 8]; // buffer for at least one row of color bits
+// uint8_t mono_palette_buffer[max_palette_pixels / 8]; // palette buffer for depth <= 8 b/w
+// uint8_t color_palette_buffer[max_palette_pixels / 8]; // palette buffer for depth <= 8 c/w
 

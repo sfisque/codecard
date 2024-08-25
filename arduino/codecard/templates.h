@@ -811,14 +811,22 @@ void custom(){
     Menu Stuff
 */
 
-#define MENU_SIZE 15
-#define MENU_5_EM "MMMMM"
+#define MENU_SIZE 10
+#define MENU_6_EM "MMMMMM"
 
+// menu
 #define SCREEN_1 1
+// card one
 #define SCREEN_2 2
+// card two
 #define SCREEN_3 3
+// card three
 #define SCREEN_4 4
+// about screen
 #define SCREEN_5 5
+// card four
+#define SCREEN_6 6
+
 
 class Navigation
 {
@@ -845,37 +853,41 @@ Navigation::Navigation( String l, char c, char n, char s )
 Navigation::Navigation()
 {}
 
-Navigation *navigation[ 16 ];
+Navigation *navigation[ 10 ];
 
 void initNavigation()
 {
-    navigation[ 0 ] = new Navigation( "Card", 104, 1, SCREEN_1 );
-    navigation[ 1 ] = new Navigation( "Web", 105, 2, SCREEN_1 );
-    navigation[ 2 ] = new Navigation( "Config", 110, 3, SCREEN_1 );
-    navigation[ 3 ] = new Navigation( "About", 115, 0, SCREEN_1 );
+    navigation[ 0 ] = new Navigation( "Card One", 105, 1, SCREEN_1 );
+    navigation[ 1 ] = new Navigation( "Card Two", 106, 2, SCREEN_1 );
+    navigation[ 2 ] = new Navigation( "Card Three", 107, 3, SCREEN_1 );
+    navigation[ 3 ] = new Navigation( "Card Four", 108, 4, SCREEN_1 );
+    navigation[ 4 ] = new Navigation( "About", 109, 0, SCREEN_1 );
 
-    navigation[ 4 ] = new Navigation( "Back", 100, 4, SCREEN_2 );
+    navigation[ 5 ] = new Navigation( "Back", 100, 5, SCREEN_2 );
+    navigation[ 6 ] = new Navigation( "Back", 100, 6, SCREEN_3 );
+    navigation[ 7 ] = new Navigation( "Back", 100, 7, SCREEN_4 );
+    navigation[ 8 ] = new Navigation( "Back", 100, 8, SCREEN_6 );
     
-    navigation[ 5 ] = new Navigation( "Back", 100, 6, SCREEN_3 );
-    navigation[ 6 ] = new Navigation( "Fetch One", 1, 7, SCREEN_3 );
-    navigation[ 7 ] = new Navigation( "Fetch Two", 2, 8, SCREEN_3 );
-    navigation[ 8 ] = new Navigation( "Fetch Three", 3, 9, SCREEN_3 );
-    navigation[ 9 ] = new Navigation( "Fetch Four", 4, 5, SCREEN_3 );
+    // navigation[ 5 ] = new Navigation( "Back", 100, 6, SCREEN_3 );
+    // navigation[ 6 ] = new Navigation( "Fetch One", 1, 7, SCREEN_3 );
+    // navigation[ 7 ] = new Navigation( "Fetch Two", 2, 8, SCREEN_3 );
+    // navigation[ 8 ] = new Navigation( "Fetch Three", 3, 9, SCREEN_3 );
+    // navigation[ 9 ] = new Navigation( "Fetch Four", 4, 5, SCREEN_3 );
 
-    navigation[ 10 ] = new Navigation( "Back", 100, 11, SCREEN_4 );
-    navigation[ 11 ] = new Navigation( "Start Term", 5, 12, SCREEN_4 );
-    navigation[ 12 ] = new Navigation( "Stop Term", 6, 13, SCREEN_4 );
-    navigation[ 13 ] = new Navigation( "Native", 7, 10, SCREEN_4 );
+    // navigation[ 10 ] = new Navigation( "Back", 100, 11, SCREEN_4 );
+    // navigation[ 11 ] = new Navigation( "Start Term", 5, 12, SCREEN_4 );
+    // navigation[ 12 ] = new Navigation( "Stop Term", 6, 13, SCREEN_4 );
+    // navigation[ 13 ] = new Navigation( "Native", 7, 10, SCREEN_4 );
     // navigation[ 14 ] = new Navigation( "9600 bps", 8, 10, SCREEN_4 );
 
     // navigation[ 15 ] = new Navigation( "Close About", 100, 15, SCREEN_5 );
-    navigation[ 14 ] = new Navigation( "Close About", 100, 14, SCREEN_5 );
+    navigation[ 9 ] = new Navigation( "Close About", 100, 9, SCREEN_5 );
 }
 
 
-String menu[ MENU_SIZE ] = {
-    "Card", "Web", "Config", "About"
-};
+// String menu[ MENU_SIZE ] = {
+//     "Card 1", "Card 2", "Card 3", "About"
+// };
 
 
 int current = 0;
@@ -947,17 +959,22 @@ void chooseScreen()
         }
         case SCREEN_3:
         {
-            menuScreen();
+            pushButton( "a", 2 );
             break;
         }
         case SCREEN_4:
         {
-            menuScreen();
+            pushButton( "b", 1 );
             break;
         }
         case SCREEN_5:
         {
             aboutScreen();
+            break;
+        }
+        case SCREEN_6:
+        {
+            pushButton( "b", 2 );
             break;
         }
     }
@@ -971,7 +988,7 @@ void menuScreen()
 
     display.setTextColor( GxEPD_BLACK, GxEPD_WHITE );    
     display.setFont( &FreeSansBold18pt7b );
-    display.getTextBounds( MENU_5_EM, 0, 0, &tbx, &tby, &tbw, &tbh );
+    display.getTextBounds( MENU_6_EM, 0, 0, &tbx, &tby, &tbw, &tbh );
 
     display.setPartialWindow( 0, 0, display.width(), display.height() );
 
@@ -988,7 +1005,7 @@ void menuScreen()
 
                 if( index == current )
                 {
-                    display.fillRect( 0, i * ( tbh + 8 ) + 4, tbw + 16, tbh + 12, GxEPD_BLACK );
+                    display.fillRect( 0, i * ( tbh + 8 ) + 2, tbw + 8, tbh + 12, GxEPD_BLACK );
                     display.setTextColor( GxEPD_WHITE, GxEPD_BLACK );    
                 }
                 else

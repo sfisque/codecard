@@ -14,6 +14,7 @@ int getKeyIndex(String val){
   return ret;
 }
 
+
 String getFromMemory(int addr) {
   char arrayToStore[100];
   if (EEPROM.read(addr*maxValue) == 255){
@@ -23,6 +24,7 @@ String getFromMemory(int addr) {
   String ret(arrayToStore);
   return ret;
 }
+
 
 String getFromMemory(String key) {
   String ret = "";
@@ -41,6 +43,7 @@ String getFromMemory(String key) {
   }
   return ret;
 }
+
 
 void saveToMemory(int addr, String val) {
   char arrayToStore[100];

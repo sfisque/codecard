@@ -2,9 +2,9 @@
   icons.h
   Use http://javl.github.io/image2cpp/ to create bitmap to c code.
 */
-int maxIcons64 = 25;
-int maxIcons128 = 12;
-int maxBackgrounds = 2;
+// int maxIcons64 = 25;
+// int maxIcons128 = 12;
+// int maxBackgrounds = 2;
 
 /*
 const char* const icons64 [] PROGMEM = {
