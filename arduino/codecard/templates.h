@@ -189,7 +189,6 @@ void drawBadge( int x, int y, int radius, String badge, long color )
 /*
 */
 
-
 typedef struct Point
 {
     int x, y;
@@ -214,7 +213,7 @@ class Template
 
     Template();
     Template( Point tLoc, GFXfont *tFont, Point stLoc, GFXfont *stFont, Point bLoc, GFXfont *bFont );
-    Template( int bgColor, int tColor, Point tLoc, GFXfont *tFont, Point stLoc, GFXfont *stFont, Point bLoc, GFXfont *bFont );
+    Template( int bgColor, int tColor, Point tLoc, const GFXfont *tFont, Point stLoc, const GFXfont *stFont, Point bLoc, const GFXfont *bFont );
 
     void render( String title, String subtitle, String body, String icon, String badge, String fingerprint );
     void drawBadge( int x, int y, int radius, String badge, long color );
@@ -235,11 +234,30 @@ Template::Template()
 
 Template::Template( Point tLoc, GFXfont *tFont, Point stLoc, GFXfont *stFont, Point bLoc, GFXfont *bFont )
 {
+    this->titleLoc = tLoc;
+    this->titleFont = tFont;
+    
+    this->subTitleLoc = stLoc;
+    this->subTitleFont = stFont;
+
+    this->bodyLoc = bLoc;
+    this->bodyFont = bFont;
 }
 
-Template::Template( int bgColor, int tColor, Point tLoc, GFXfont *tFont, Point stLoc, GFXfont *stFont, Point bLoc, GFXfont *bFont )
+Template::Template( int bgColor, int tColor, Point tLoc, const GFXfont *tFont, Point stLoc, const GFXfont *stFont
+        , Point bLoc, const GFXfont *bFont )
 {
+    this->backgroundColor = bgColor;
+    this->textColor = tColor;
+    
+    this->titleLoc = tLoc;
+    this->titleFont = tFont;
+    
+    this->subTitleLoc = stLoc;
+    this->subTitleFont = stFont;
 
+    this->bodyLoc = bLoc;
+    this->bodyFont = bFont;
 }
 
 
@@ -255,44 +273,73 @@ void Template::drawIcon64( int x, int y, String icon, long color )
 
 void Template::render( String title, String subtitle, String body, String icon, String badge, String fingerprint )
 {
+    uint8_t* iconBuffer = NULL;
+
     display.setFullWindow();
     display.firstPage();
     
-    do {
+    if( icon != "" && icon.indexOf( "http") >= 0 ) 
+    {
+        // this->drawIcon64( 0, 0, icon, this->textColor );
+Serial.println( "Template::render :: call to imageFromUrl()" );
+        yield();
+        iconBuffer = fetchImageFromUrl( icon, 0, 0, fingerprint , false, 3 );
+    }
+    
+    do 
+    {
         display.fillScreen( this->backgroundColor );
         display.setTextColor( this->textColor );  
-
-        if ( badge != "" ) 
-        {
-            this->drawBadge( 0, 0, 32, badge, this->backgroundColor);  
-        } 
-        else if( icon != "" && icon.indexOf( "http") == -1 && badge == "" ) 
-        {
-            this->drawIcon64( 0, 0, icon, this->textColor );
-        }
         
         // title
         display.setFont( this->titleFont );  
         display.setCursor( titleLoc.x, titleLoc.y );
-        display.println( title.substring( 0, 16 ) );  
+        display.println( title );  
     
         // subtitle 
         display.setFont( this->subTitleFont );
         display.setCursor( this->subTitleLoc.x, this->subTitleLoc.y );
-        display.println( subtitle.substring( 0, 20 ) );
+        display.println( subtitle );
     
         // body
         display.setFont( this->bodyFont );
         display.setCursor( this->bodyLoc.x, this->bodyLoc.y );
-        display.println( body.substring( 0, 170 ) );
+        display.println( body );
+     
+        if( iconBuffer != NULL )
+        {
+            display.drawBitmap( 0, 0, iconBuffer, 64, 64, this->textColor );
+        }
     }
     while( display.nextPage() );
 
-    // if (icon != "" && icon.indexOf("http") > -1 && badge == ""){
-    //     imageFromUrl(icon, 0, 0, fingerprint , false);
-    // }
-        
+    free( iconBuffer );
 }
+
+
+Template *templateList[ 10 ];
+
+void initTemplates()
+{
+    templateList[ 0 ] = new Template( GxEPD_WHITE, GxEPD_BLACK
+        , { 72, 25 }, &FreeSansBold12pt7b, { 73, 45 }, &FreeSansBold9pt7b
+        , { 0, 84 }, &FreeSansBold9pt7b );
+    
+    templateList[ 1 ] = new Template( GxEPD_WHITE, GxEPD_BLACK
+        , { 0, 20 }, &FreeSansBold12pt7b, { 0, 38 }, &FreeSansBold9pt7b
+        , { 0, 125 }, &FreeSansBold9pt7b );
+    
+    templateList[ 2 ] = new Template( GxEPD_WHITE, GxEPD_BLACK
+        , { 72, 5 }, &FreeSansBold12pt7b, { 73, 45 }, &FreeSansBold9pt7b
+        , { 0, 84 }, &FreeSansBold9pt7b );
+        
+    templateList[ 3 ] = new Template( GxEPD_WHITE, GxEPD_BLACK
+        , { 72, 5 }, &FreeSansBold12pt7b, { 73, 45 }, &FreeSansBold9pt7b
+        , { 0, 84 }, &FreeSansBold9pt7b );
+}
+
+
+
 
 
 /*

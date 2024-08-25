@@ -61,6 +61,8 @@ void setup() {
 
   defaultScreen();
 
+    initTemplates();
+
   EEPROM.begin(eepromSize);
 
     initNavigation();

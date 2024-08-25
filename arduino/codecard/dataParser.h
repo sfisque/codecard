@@ -48,15 +48,18 @@ void parseJson(String jsonString)
     saveToMemory( getKeyIndex( "showdefaultscreen" ), "false" );
     
     if (templateName == "template1") {
-        template1( title, subtitle, body, icon, badge, backgroundColor, fingerprint );
-    } /*
-        else if (templateName == "template2") {
-        template2(title, subtitle, body, icon, badge, backgroundColor, fingerprint);
+        templateList[ 0 ]->render( title, subtitle, body, icon, badge, fingerprint );
+        // template1( title, subtitle, body, icon, badge, backgroundColor, fingerprint );
+    } else if (templateName == "template2") {
+        // template2(title, subtitle, body, icon, badge, backgroundColor, fingerprint);
+        templateList[ 1 ]->render( title, subtitle, body, icon, badge, fingerprint );
     } else if (templateName == "template3") {
-        template3(title, subtitle, body, icon, badge, backgroundColor, fingerprint);
+        // template3(title, subtitle, body, icon, badge, backgroundColor, fingerprint);
+        templateList[ 2 ]->render( title, subtitle, body, icon, badge, fingerprint );
     } else if (templateName == "template4") {
-        template4(title, subtitle, body, icon, badge, backgroundColor, fingerprint);
-    } else if (templateName == "template5") {
+        // template4(title, subtitle, body, icon, badge, backgroundColor, fingerprint);
+        templateList[ 3 ]->render( title, subtitle, body, icon, badge, fingerprint );
+    } /* else if (templateName == "template5") {
         template5(title, subtitle, body, backgroundColor);
     } else if (templateName == "template6") {
         template6(title, subtitle, body, backgroundColor);    
