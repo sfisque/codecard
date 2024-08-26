@@ -23,7 +23,7 @@ void parseJson(String jsonString)
     {
         Serial.println(F("JSON parsing failed!"));
         Serial.println(F(">>>"));
-        template1("Invalid response", "Please verify JSON",  jsonString ,"fail","","", "");
+        cardScreen( "Invalid response", "Please verify JSON",  jsonString );
         //saveToMemory(getKeyIndex("showdefaultscreen"), "true");
         return;
     }

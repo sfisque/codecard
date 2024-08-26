@@ -74,7 +74,7 @@ void drawBarcode39(int x, int y, int width, int height, int pitch, String barcod
 
 /*
 */
-void drawIcon64(int x, int y, String icon, long color){
+// void drawIcon64(int x, int y, String icon, long color){
   
 //   if (icon == "01d" || icon == "01n") { display.drawInvertedBitmap(x, y, weather01, 64, 64, color); return; }
 //   if (icon == "02d" || icon == "02n") { display.drawInvertedBitmap(x, y, weather02, 64, 64, color); return; }
@@ -104,13 +104,13 @@ void drawIcon64(int x, int y, String icon, long color){
 //   if (icon == "javascript") { display.drawInvertedBitmap(x, y, javascript64, 64, 64, color); return; }  
 //   if (icon == "nighthacker") { display.drawInvertedBitmap(x, y, nighthacker64, 64, 64, color); return; }   
 //   if (icon == "wifi") { display.drawInvertedBitmap(x, y, wifi64, 64, 64, color); return; } 
-}
+// }
 /*
 */
 
 /*
 */
-void drawIcon128(int x, int y, String icon, long color){
+// void drawIcon128(int x, int y, String icon, long color){
 //   if (icon == "oracle") { display.drawInvertedBitmap(x, y, oracle128, 128, 128, color); return; }
 //   if (icon == "champion") { display.drawInvertedBitmap(x, y, champion128, 128, 128, color); return; }  
 //   if (icon == "jduchess") { display.drawInvertedBitmap(x, y, jduchess128, 128, 128, color); return; }  
@@ -125,67 +125,65 @@ void drawIcon128(int x, int y, String icon, long color){
 //   if (icon == "javascript") { display.drawInvertedBitmap(x, y, javascript128, 128, 128, color); return; } 
 //   if (icon == "nighthacker") { display.drawInvertedBitmap(x, y, nighthacker128, 128, 128, color); return; } 
 //   if (icon == "wifi") { display.drawInvertedBitmap(x, y, wifi128, 128, 128, color); return; } 
-}
+// }
 /*
 */
 
 /*
 */
-void drawBackground(int x, int y, String backgroundImage, long color){ 
+// void drawBackground(int x, int y, String backgroundImage, long color){ 
 //   if (backgroundImage == "codeone") { display.drawInvertedBitmap(x, y, codeone264, display.width(), display.height(), color); return; } 
 //   if (backgroundImage == "oracle") { display.drawInvertedBitmap(x, y, oracle264, display.width(), display.height(), color); return; } 
-}
+// }
 /*
 */
 
 /*
 */
-void drawBadge( int x, int y, int radius, String badge, long color ) 
-{
-    int circleColor = GxEPD_BLACK;
-    int badgeText = GxEPD_WHITE;
+// void drawBadge( int x, int y, int radius, String badge, long color ) 
+// {
+//     int circleColor = GxEPD_BLACK;
+//     int badgeText = GxEPD_WHITE;
 
-    if (color == GxEPD_BLACK) {
-      circleColor = GxEPD_WHITE;
-      badgeText = GxEPD_BLACK;
-    }
+//     if (color == GxEPD_BLACK) {
+//       circleColor = GxEPD_WHITE;
+//       badgeText = GxEPD_BLACK;
+//     }
   
-    //int radius = 32;
-    bool isDegree = false;
-    if (badge.indexOf("u00B0") > -1 ){
-      badge.replace("u00B0", "");
-      isDegree = true;
-    }
-    display.fillCircle(x + radius, y + radius, radius - 2, circleColor);
-    display.setTextColor(badgeText);
-    if (badge.length() > 1 && badge.length() < 3) {
-      // Two characters
-      display.setFont(&FreeMonoBold18pt7b);
-      display.setCursor(x  + 11, y + 42); 
-    } else if (badge.length() == 1 ) {
-      // One character
-      display.setFont(&FreeMonoBold18pt7b);  
-      display.setCursor(x + 21, y + 44);
-    } else if (badge.length() > 2 ) {
-      // Three characters
-      display.setFont(&FreeMonoBold12pt7b);  
-      display.setCursor(x + 11, y + 40);
-    }
-    display.print(badge);
+//     //int radius = 32;
+//     bool isDegree = false;
+//     if (badge.indexOf("u00B0") > -1 ){
+//       badge.replace("u00B0", "");
+//       isDegree = true;
+//     }
+//     display.fillCircle(x + radius, y + radius, radius - 2, circleColor);
+//     display.setTextColor(badgeText);
+//     if (badge.length() > 1 && badge.length() < 3) {
+//       // Two characters
+//       display.setFont(&FreeMonoBold18pt7b);
+//       display.setCursor(x  + 11, y + 42); 
+//     } else if (badge.length() == 1 ) {
+//       // One character
+//       display.setFont(&FreeMonoBold18pt7b);  
+//       display.setCursor(x + 21, y + 44);
+//     } else if (badge.length() > 2 ) {
+//       // Three characters
+//       display.setFont(&FreeMonoBold12pt7b);  
+//       display.setCursor(x + 11, y + 40);
+//     }
+//     display.print(badge);
 
-    if (isDegree == true) {
-      display.setFont(&TomThumb);
-      display.setTextSize(2);
-      //display.setCursor(x + radius + radius / 2 + 5, y + radius - radius / 3 + 5);
-      display.setCursor(x + radius + radius / 2, y + radius - radius / 3);
-      display.print("o");
-    }
+//     if (isDegree == true) {
+//       display.setFont(&TomThumb);
+//       display.setTextSize(2);
+//       //display.setCursor(x + radius + radius / 2 + 5, y + radius - radius / 3 + 5);
+//       display.setCursor(x + radius + radius / 2, y + radius - radius / 3);
+//       display.print("o");
+//     }
 
-    display.setTextSize(1);
-    display.setTextColor(circleColor);
- 
-
-}
+//     display.setTextSize(1);
+//     display.setTextColor(circleColor);
+// }
 /*
 */
 
@@ -209,16 +207,16 @@ class Template
     Point bodyLoc = { 0, 80 };
     const GFXfont *bodyFont;
 
+    Point iconLoc = { 0, 0 };
+
     public:
 
     Template();
     Template( Point tLoc, GFXfont *tFont, Point stLoc, GFXfont *stFont, Point bLoc, GFXfont *bFont );
-    Template( int bgColor, int tColor, Point tLoc, const GFXfont *tFont, Point stLoc, const GFXfont *stFont, Point bLoc, const GFXfont *bFont );
+    Template( int bgColor, int tColor, Point tLoc, const GFXfont *tFont, Point stLoc, const GFXfont *stFont
+            , Point bLoc, const GFXfont *bFont, Point iLoc );
 
     void render( String title, String subtitle, String body, String icon, String badge, String fingerprint );
-    void drawBadge( int x, int y, int radius, String badge, long color );
-    void drawIcon64( int x, int y, String icon, long color );
-
 };
 
 
@@ -244,8 +242,9 @@ Template::Template( Point tLoc, GFXfont *tFont, Point stLoc, GFXfont *stFont, Po
     this->bodyFont = bFont;
 }
 
+
 Template::Template( int bgColor, int tColor, Point tLoc, const GFXfont *tFont, Point stLoc, const GFXfont *stFont
-        , Point bLoc, const GFXfont *bFont )
+        , Point bLoc, const GFXfont *bFont, Point iLoc )
 {
     this->backgroundColor = bgColor;
     this->textColor = tColor;
@@ -258,18 +257,10 @@ Template::Template( int bgColor, int tColor, Point tLoc, const GFXfont *tFont, P
 
     this->bodyLoc = bLoc;
     this->bodyFont = bFont;
+
+    this->iconLoc = iLoc;
 }
 
-
-void Template::drawBadge( int x, int y, int radius, String badge, long color )
-{
-
-}
-
-void Template::drawIcon64( int x, int y, String icon, long color )
-{
-
-}
 
 void Template::render( String title, String subtitle, String body, String icon, String badge, String fingerprint )
 {
@@ -289,12 +280,12 @@ Serial.println( "Template::render :: call to imageFromUrl()" );
     do 
     {
         display.fillScreen( this->backgroundColor );
-        display.setTextColor( this->textColor );  
+        display.setTextColor( this->textColor );
         
         // title
-        display.setFont( this->titleFont );  
+        display.setFont( this->titleFont );
         display.setCursor( titleLoc.x, titleLoc.y );
-        display.println( title );  
+        display.println( title );
     
         // subtitle 
         display.setFont( this->subTitleFont );
@@ -308,7 +299,7 @@ Serial.println( "Template::render :: call to imageFromUrl()" );
      
         if( iconBuffer != NULL )
         {
-            display.drawBitmap( 0, 0, iconBuffer, 64, 64, this->textColor );
+            display.drawBitmap( iconLoc.x, iconLoc.y, iconBuffer, 64, 64, this->textColor );
         }
     }
     while( display.nextPage() );
@@ -316,34 +307,41 @@ Serial.println( "Template::render :: call to imageFromUrl()" );
     free( iconBuffer );
 }
 
-
+/*
+    Template lookup table
+*/
 Template *templateList[ 10 ];
 
 void initTemplates()
 {
     templateList[ 0 ] = new Template( GxEPD_WHITE, GxEPD_BLACK
         , { 72, 25 }, &FreeSansBold12pt7b, { 73, 45 }, &FreeSansBold9pt7b
-        , { 0, 84 }, &FreeSansBold9pt7b );
+        , { 0, 90 }, &FreeSansBold9pt7b, { 0, 0 } );
     
     templateList[ 1 ] = new Template( GxEPD_WHITE, GxEPD_BLACK
-        , { 0, 20 }, &FreeSansBold12pt7b, { 0, 38 }, &FreeSansBold9pt7b
-        , { 0, 125 }, &FreeSansBold9pt7b );
+        , { 0, 20 }, &FreeSansBold12pt7b, { 0, 38 }, &FreeSans9pt7b
+        , { 0, 125 }, &FreeSans9pt7b, { 102, 56 } );
     
     templateList[ 2 ] = new Template( GxEPD_WHITE, GxEPD_BLACK
-        , { 72, 5 }, &FreeSansBold12pt7b, { 73, 45 }, &FreeSansBold9pt7b
-        , { 0, 84 }, &FreeSansBold9pt7b );
+        , { 0, 25 }, &FreeSansBold12pt7b, { 1, 50 }, &FreeSans9pt7b
+        , { 0, 80 }, &FreeSans9pt7b, { 198, 102 } );
         
     templateList[ 3 ] = new Template( GxEPD_WHITE, GxEPD_BLACK
-        , { 72, 5 }, &FreeSansBold12pt7b, { 73, 45 }, &FreeSansBold9pt7b
-        , { 0, 84 }, &FreeSansBold9pt7b );
+        , { 0, 25 }, &FreeSansBold12pt7b, { 0, 50 }, &FreeSans9pt7b
+        , { 0, 75 }, &FreeSans9pt7b, { 198, 108 } );
 }
 
+// 264, 176
 
+/*
 
+    */
 
 
 /*
+    deprecated
 */
+/*
 void template1( String title, String subtitle, String body, String icon, String badge, String backgroundColor, String fingerprint) 
 {
     long bgColor = GxEPD_WHITE;
@@ -403,8 +401,8 @@ Serial.println( "template1 :: call to imageFromUrl()" );
         free( iconBuffer );
     }
 }
-/*
 */
+
 
 /*
 void template2(String title, String subtitle, String body, String icon, String badge, String backgroundColor, String fingerprint) {
@@ -859,7 +857,7 @@ void custom(){
 */
 
 #define MENU_SIZE 10
-#define MENU_6_EM "MMMMMM"
+#define MENU_8_EM "MMMMMMMM"
 
 // menu
 #define SCREEN_1 1
@@ -1035,7 +1033,7 @@ void menuScreen()
 
     display.setTextColor( GxEPD_BLACK, GxEPD_WHITE );    
     display.setFont( &FreeSansBold18pt7b );
-    display.getTextBounds( MENU_6_EM, 0, 0, &tbx, &tby, &tbw, &tbh );
+    display.getTextBounds( MENU_8_EM, 0, 0, &tbx, &tby, &tbw, &tbh );
 
     display.setPartialWindow( 0, 0, display.width(), display.height() );
 
@@ -1052,7 +1050,7 @@ void menuScreen()
 
                 if( index == current )
                 {
-                    display.fillRect( 0, i * ( tbh + 8 ) + 2, tbw + 8, tbh + 12, GxEPD_BLACK );
+                    display.fillRect( 0, i * ( tbh + 8 ) + 4, tbw + 8, tbh + 8, GxEPD_BLACK );
                     display.setTextColor( GxEPD_WHITE, GxEPD_BLACK );    
                 }
                 else
@@ -1070,14 +1068,14 @@ void menuScreen()
 }
 
 
-void cardScreen()
+void cardScreen( String title, String subTitle, String body )
 {
     int16_t tbx, tby; 
     uint16_t tbw, tbh;
 
     display.setTextColor( GxEPD_BLACK, GxEPD_WHITE );    
     display.setFont( &FreeSansBold18pt7b );
-    display.getTextBounds( "MMMMMMMM", 0, 0, &tbx, &tby, &tbw, &tbh );
+    display.getTextBounds( "MMMMMMM", 0, 0, &tbx, &tby, &tbw, &tbh );
 
     display.setPartialWindow( 0, 0, display.width(), display.height() );
 
@@ -1085,30 +1083,16 @@ void cardScreen()
 
     do 
     {
-        display.setCursor( 4, tbh + 8 );
-        display.println( "Card" );
-    }
-    while ( display.nextPage() );    // flashing
-}
+        display.setCursor( 2, tbh +2);
+        display.println( title );
 
+        display.setCursor( 2, 2 * tbh + 4 );
+        display.setFont( &FreeSans12pt7b );
+        display.println( subTitle );
 
-void configScreen()
-{
-    int16_t tbx, tby; 
-    uint16_t tbw, tbh;
-
-    display.setTextColor( GxEPD_BLACK, GxEPD_WHITE );    
-    display.setFont( &FreeSansBold18pt7b );
-    display.getTextBounds( "MMMMMMMMMMM", 0, 0, &tbx, &tby, &tbw, &tbh );
-
-    display.setPartialWindow( 0, 0, display.width(), display.height() );
-
-    display.firstPage();
-
-    do 
-    {
-        display.setCursor( 4, tbh + 8 );
-        display.println( "Configure" );
+        display.setCursor( 2, 2 * 3 * tbh + 6 );
+        display.setFont( &FreeSans9pt7b );
+        display.println( body );
     }
     while ( display.nextPage() );    // flashing
 }
@@ -1134,6 +1118,7 @@ void aboutScreen()
     }
     while ( display.nextPage() );    // flashing
 }
+
 
 void defaultScreen()
 {  
