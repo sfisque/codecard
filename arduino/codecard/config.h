@@ -2,20 +2,30 @@
   config.h
 
 */
+#define DEBUGSERIAL 1
+
+
 #include <ESP8266WiFi.h>      // ESP8266 Board support needed. Add http://arduino.esp8266.com/stable/package_esp8266com_index.json to Borad Manager Urls (Preferences)
 #include <ArduinoJson.h>      // Search and add using Arduino Library Manager
 #include <pgmspace.h>
 #include <EEPROM.h>
 #include <GxEPD2_BW.h>        // Download/Clone and put in Arduino Library https://github.com/ZinggJM/GxEPD2
 
+#include <WiFiClientSecureBearSSL.h>
+
 // ArduinoJson - 7.1.0
 // GxEPD2_BW - 1.5.8
 // ESP8266Wifi - 2.4.2
-// ESP8266Wifi - 2.5.2 - requires changes to TLS support in WiFi support - breaking changes
-// ESP8266Wifi - 2.6.3 - ?
-// ESP8266Wifi - 2.7.4 - ?
-// ESP8266Wifi - 3.0.2 - ?
+// ESP8266Wifi - 2.5.2 - requires changes to TLS support in WiFi support - breaking changes - breaks EEPROM settings
+// ESP8266Wifi - 2.6.3 - compiles (with changes) but fails to upload file to codecard on osx (exit status 1)
+// ESP8266Wifi - 2.7.4 - compiles (with changes) but fails to upload file to codecard on osx (exit status 1)
+// ESP8266Wifi - 3.0.2 - compiles (with changes), uploads, runs, SSL still broken
 // ESP8266Wifi - 3.1.2 - ?
+// BearSSL - 1.3.0 - SSL fingeprint not working
+// BearSSL - 1.4.0 - SSL fingeprint not working
+// BearSSL - 1.5.0 - 
+// BearSSL - 1.6.0 - 
+// BearSSL - 1.7.4 - 
 
 // Also make sure you have the Adafruit GFX library
 

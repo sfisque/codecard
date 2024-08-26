@@ -60,6 +60,7 @@ void setup()
         if( startTime > ( 100000 * 8 ) ) { break; }
     }
     Serial.begin( BAUD_SPEED );
+
     display.init( /* BAUD_SPEED */ (uint32_t) 0, false, (uint16_t) 5, false );
     display.setRotation( 3 );
 
