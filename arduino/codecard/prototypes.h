@@ -20,7 +20,7 @@ uint8_t* fetchImageFromUrl( String url, int16_t x, int16_t y, String fingerprint
 void pushButton( String btnLabel, int btnFunction );
 
 //******************************************
-// defined in buttonEvents.h
+// defined in templates.h
 //******************************************
 
 void initTemplates();

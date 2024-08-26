@@ -70,8 +70,10 @@ void disconnectWifi()
     Serial.println(F(">>>"));
 }
 
-void restartWifi() {
-  Serial.println(F("Restarting..."));
-  WiFi.disconnect(true);
-  wifiConnect();
+
+void restartWifi() 
+{
+    Serial.println(F("Restarting..."));
+    WiFi.disconnect(true);
+    wifiConnect();
 }

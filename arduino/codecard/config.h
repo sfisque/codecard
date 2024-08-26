@@ -23,8 +23,8 @@
 #define BAUD_SPEED 115200
 
 // Button pins
-#define BUTTON1_PIN 10   //10
-#define BUTTON2_PIN 12    //12
+#define BUTTON1_PIN 10
+#define BUTTON2_PIN 12
 
 int btn1State = LOW;
 int btn2State = LOW;
