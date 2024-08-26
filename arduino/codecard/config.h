@@ -20,12 +20,12 @@
 // ESP8266Wifi - 2.6.3 - compiles (with changes) but fails to upload file to codecard on osx (exit status 1)
 // ESP8266Wifi - 2.7.4 - compiles (with changes) but fails to upload file to codecard on osx (exit status 1)
 // ESP8266Wifi - 3.0.2 - compiles (with changes), uploads, runs, SSL still broken
-// ESP8266Wifi - 3.1.2 - ?
+// ESP8266Wifi - 3.1.2 - compiles (with changes), uploads, runs, SSL still broken
 // BearSSL - 1.3.0 - SSL fingeprint not working
 // BearSSL - 1.4.0 - SSL fingeprint not working
-// BearSSL - 1.5.0 - 
-// BearSSL - 1.6.0 - 
-// BearSSL - 1.7.4 - 
+// BearSSL - 1.5.0 - SSL fingeprint not working
+// BearSSL - 1.6.0 - SSL fingeprint not working
+// BearSSL - 1.7.4 - SSL fingeprint not working
 
 // Also make sure you have the Adafruit GFX library
 
