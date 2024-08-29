@@ -66,7 +66,7 @@ const char* projectSite = "developer.oracle.com/codecard";
 
 const char* defaultSSID = "CHANGE_TO_SSID";
 const char* defaultPassword = "CHANGE_TO_PASSWORD";
-const char* defaultUrl = "http://buddha.latticeware.com:8080/v1/codecard/shorta/template1";
+const char* defaultUrl = "http://localhost:8080/a-json-file.json";
 const char* defaultFingerprint = "change to space delimited fingerprint";
 
 //char arrayToStore[100];
