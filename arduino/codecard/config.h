@@ -11,6 +11,7 @@
 #include <EEPROM.h>
 #include <GxEPD2_BW.h>        // Download/Clone and put in Arduino Library https://github.com/ZinggJM/GxEPD2
 
+#include <ESP8266HTTPClient.h>
 #include <WiFiClientSecureBearSSL.h>
 
 // ArduinoJson - 7.1.0
@@ -26,6 +27,10 @@
 // BearSSL - 1.5.0 - SSL fingeprint not working
 // BearSSL - 1.6.0 - SSL fingeprint not working
 // BearSSL - 1.7.4 - SSL fingeprint not working
+
+#define HAS_INSECURE 1
+//#define HAS_FINGERPRINT 2
+//#define HAS_SECURE 3
 
 // Also make sure you have the Adafruit GFX library
 
@@ -45,14 +50,14 @@ GxEPD2_BW<GxEPD2_270, GxEPD2_270::HEIGHT> display(GxEPD2_270(/*CS=D8*/ 2, /*DC=D
 
 // FreeFonts from Adafruit_GFX
 #include <Fonts/FreeMono9pt7b.h>
-#include <Fonts/FreeMonoBold12pt7b.h>
-#include <Fonts/FreeMonoBold18pt7b.h>
-#include <Fonts/FreeSans9pt7b.h>
-#include <Fonts/FreeSans12pt7b.h>
-#include <Fonts/FreeSansBold9pt7b.h>
-#include <Fonts/FreeSansBold12pt7b.h>
-#include <Fonts/FreeSansBold18pt7b.h>
-#include <Fonts/TomThumb.h>
+// #include <Fonts/FreeMonoBold12pt7b.h>
+#include <Fonts/FreeMonoBold18pt7b.h> // good
+#include <Fonts/FreeSans9pt7b.h> // good
+#include <Fonts/FreeSans12pt7b.h>  // good
+#include <Fonts/FreeSansBold9pt7b.h> // good
+#include <Fonts/FreeSansBold12pt7b.h> // good
+#include <Fonts/FreeSansBold18pt7b.h> // good
+// #include <Fonts/TomThumb.h>
 
 const char* projectName = "Code Card";
 const char* projectVersion = "1.0";

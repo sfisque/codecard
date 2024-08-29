@@ -19,9 +19,9 @@ void nextMenu();
 void selectMenu();
 void chooseScreen();
 void menuScreen();
-void cardScreen();
+void cardScreen( String title, String subTitle, String body );
 void configScreen();
-void aboutScreen();
+void aboutScreen( int which );
 void defaultScreen();
 
 
@@ -29,7 +29,7 @@ void defaultScreen();
 
 // prototypes
 
-void imageFromUrl( String url, int16_t x, int16_t y, String fingerprint = "", bool with_color = true );
+// void imageFromUrl( String url, int16_t x, int16_t y, String fingerprint = "", bool with_color = true );
 
 
 // definitions
@@ -327,8 +327,8 @@ void initTemplates()
         , { 0, 80 }, &FreeSans9pt7b, { 198, 102 } );
         
     templateList[ 3 ] = new Template( GxEPD_WHITE, GxEPD_BLACK
-        , { 0, 25 }, &FreeSansBold12pt7b, { 0, 50 }, &FreeSans9pt7b
-        , { 0, 75 }, &FreeSans9pt7b, { 198, 108 } );
+        , { 25, 100 }, &FreeSansBold12pt7b, { 25, 150 }, &FreeSans9pt7b
+        , { 0, 170 }, &FreeSans9pt7b, { 2, 2 } );
 }
 
 // 264, 176
@@ -654,10 +654,12 @@ void custom(){
 #define SCREEN_3 3
 // card three
 #define SCREEN_4 4
-// about screen
-#define SCREEN_5 5
 // card four
+#define SCREEN_5 5
+// about one
 #define SCREEN_6 6
+// about two
+#define SCREEN_7 7
 
 
 class Navigation
@@ -685,7 +687,7 @@ Navigation::Navigation( String l, char c, char n, char s )
 Navigation::Navigation()
 {}
 
-Navigation *navigation[ 10 ];
+Navigation *navigation[ 11 ];
 
 void initNavigation()
 {
@@ -696,15 +698,17 @@ void initNavigation()
     navigation[ 4 ] = new Navigation( "About", 109, 0, SCREEN_1 );
 
     navigation[ 5 ] = new Navigation( "Back", 100, 5, SCREEN_2 );
-    navigation[ 6 ] = new Navigation( "Back", 100, 6, SCREEN_3 );
-    navigation[ 7 ] = new Navigation( "Back", 100, 7, SCREEN_4 );
-    navigation[ 8 ] = new Navigation( "Back", 100, 8, SCREEN_6 );
+    navigation[ 6 ] = new Navigation( "Back", 101, 6, SCREEN_3 );
+    navigation[ 7 ] = new Navigation( "Back", 102, 7, SCREEN_4 );
+    navigation[ 8 ] = new Navigation( "Back", 103, 8, SCREEN_5 );
     
     // navigation[ 5 ] = new Navigation( "Back", 100, 6, SCREEN_3 );
     // navigation[ 6 ] = new Navigation( "Fetch One", 1, 7, SCREEN_3 );
     // navigation[ 7 ] = new Navigation( "Fetch Two", 2, 8, SCREEN_3 );
     // navigation[ 8 ] = new Navigation( "Fetch Three", 3, 9, SCREEN_3 );
     // navigation[ 9 ] = new Navigation( "Fetch Four", 4, 5, SCREEN_3 );
+    navigation[ 9 ] = new Navigation( "Next About", 104, 10, SCREEN_6 );
+    navigation[ 10 ] = new Navigation( "Close About", 104, 9, SCREEN_7 );
 
     // navigation[ 10 ] = new Navigation( "Back", 100, 11, SCREEN_4 );
     // navigation[ 11 ] = new Navigation( "Start Term", 5, 12, SCREEN_4 );
@@ -713,7 +717,6 @@ void initNavigation()
     // navigation[ 14 ] = new Navigation( "9600 bps", 8, 10, SCREEN_4 );
 
     // navigation[ 15 ] = new Navigation( "Close About", 100, 15, SCREEN_5 );
-    navigation[ 9 ] = new Navigation( "Close About", 100, 9, SCREEN_5 );
 }
 
 
@@ -750,23 +753,23 @@ void selectMenu()
         return;
     }
 
-    switch( navigation[ current ]->code )
-    {
-        case 1:
-        case 2:
-        case 3: 
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-        // case 8:
-        {
-            break;
-        }
-        default:
-            // no op
-            break;
-    }
+    // switch( navigation[ current ]->code )
+    // {
+    //     case 1:
+    //     case 2:
+    //     case 3: 
+    //     case 4:
+    //     case 5:
+    //     case 6:
+    //     case 7:
+    //     // case 8:
+    //     {
+    //         break;
+    //     }
+    //     default:
+    //         // no op
+    //         break;
+    // }
 
     Serial.print( screen );
     Serial.print( " :: " );
@@ -785,28 +788,41 @@ void chooseScreen()
         }
         case SCREEN_2:
         {
+            cardScreen( "Card One", "Requesting Card One", "please stand by..." );
+
             pushButton( "a", 1 );
 //            cardScreen();
             break;
         }
         case SCREEN_3:
         {
+            cardScreen( "Card Two", "Requesting Card Two", "please stand by..." );
+
             pushButton( "a", 2 );
             break;
         }
         case SCREEN_4:
         {
+            cardScreen( "Card Three", "Requesting Card Three", "please stand by..." );
+
             pushButton( "b", 1 );
             break;
         }
         case SCREEN_5:
         {
-            aboutScreen();
+            cardScreen( "Card Four", "Requesting Card Four", "please stand by..." );
+
+            pushButton( "b", 2 );
             break;
         }
         case SCREEN_6:
         {
-            pushButton( "b", 2 );
+            aboutScreen( 1 );
+            break;
+        }
+        case SCREEN_7:
+        {
+            aboutScreen( 2 );
             break;
         }
     }
@@ -885,10 +901,29 @@ void cardScreen( String title, String subTitle, String body )
 }
 
 
-void aboutScreen()
+void aboutScreen( int which )
 {
     int16_t tbx, tby; 
     uint16_t tbw, tbh;
+    String body = "Lattice Card is the evolution of Code Card from the 2019"
+            " Code One Groundbreakers tech garden.  This new version features"
+            " various upgrades:\n"
+            "<More>        <Back>";
+
+    switch( which )
+    {
+        case 1 : break;
+        case 2 :
+        {
+            body = "* a menuing system\n"
+                "* better http handling\n"
+                "* updated libraries\n"
+                "* streamlined design\n"
+                "\nEnjoy!";
+            break;
+        }
+        default: break;
+    }
 
     display.setTextColor( GxEPD_BLACK, GxEPD_WHITE );    
     display.setFont( &FreeSansBold12pt7b );
@@ -902,6 +937,11 @@ void aboutScreen()
     {
         display.setCursor( 4, tbh + 8 );
         display.println( "About Lattice Card" );
+
+        display.setFont( NULL );
+        display.setTextSize( 2 );
+        display.println( body );
+        display.setTextSize( 1 );
     }
     while ( display.nextPage() );    // flashing
 }
