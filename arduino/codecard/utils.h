@@ -3,7 +3,7 @@
   
 */
 
-String parseValue( String data, char separator, int index ) 
+String parseValue( String data, char separator, int index, int remainder )
 {
     int found = 0;
     int strIndex[] = { 0, -1 };
@@ -16,7 +16,19 @@ String parseValue( String data, char separator, int index )
             strIndex[1] = (i == maxIndex) ? i+1 : i;
         }
     }
-    return found > index ? data.substring(strIndex[0], strIndex[1]) : "";
+    
+    if( remainder != 0 )
+    {
+Serial.print( "parseValue :: " ); Serial.println( strIndex[ 0 ] );
+        return found > index ? data.substring( strIndex[0] ) : "";
+    }   
+
+    return found > index ? data.substring( strIndex[0], strIndex[1] ) : "";
+}
+
+String parseValue( String data, char separator, int index ) 
+{
+    return parseValue( data, separator, index, 0 );
 }
 
 

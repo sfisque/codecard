@@ -60,6 +60,7 @@ void setup()
         if( startTime > ( 100000 * 8 ) ) { break; }
     }
     Serial.begin( BAUD_SPEED );
+
     display.init( /* BAUD_SPEED */ (uint32_t) 0, false, (uint16_t) 5, false );
     display.setRotation( 3 );
 
@@ -68,6 +69,24 @@ void setup()
     initTemplates();
 
     EEPROM.begin(eepromSize);
+
+    // cardScreen( "NTP", "Sending NTP request", "please stand by..." );
+
+    wifiConnect();
+    // configTime( 3 * 3600, 0, "pool.ntp.org", "time.nist.gov" );
+
+    // time_t now = time(nullptr);
+    // while (now < 8 * 3600 * 2) 
+    // {
+    //     delay(500);
+    //     Serial.print(".");
+    //     now = time(nullptr);
+    // }
+    // Serial.println("");
+    // struct tm timeinfo;
+    // gmtime_r(&now, &timeinfo);
+    // Serial.print("Current time: ");
+    // Serial.print(asctime(&timeinfo));
 
     initNavigation();
 
@@ -88,6 +107,22 @@ void setup()
     //     }
     //     return;
     // }
+
+    // wifiConnect();
+    // configTime( 3 * 3600, 0, "pool.ntp.org", "time.nist.gov" );
+
+    // time_t now = time(nullptr);
+    // while (now < 8 * 3600 * 2) 
+    // {
+    //     delay(500);
+    //     Serial.print(".");
+    //     now = time(nullptr);
+    // }
+    // Serial.println("");
+    // struct tm timeinfo;
+    // gmtime_r(&now, &timeinfo);
+    // Serial.print("Current time: ");
+    // Serial.print(asctime(&timeinfo));
 }
 
 
