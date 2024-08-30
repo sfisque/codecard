@@ -33,8 +33,8 @@ void pushButton( String btnLabel, int btnFunction )
     if (protocol == "https:") 
     {
         int port = (portString.length() != 0) ? portString.toInt() : 443;
-        String response = secureRequest( host, port, uri, btnLabel, btnFunction );
-        // String response = request(host, port, uri, btnLabel, btnFunction, 1 );
+        // String response = secureRequest( host, port, uri, btnLabel, btnFunction );
+        String response = request( host, port, uri, btnLabel, btnFunction, 1 );
         if (response != "") { parseJson(response); }
     } 
     else 
