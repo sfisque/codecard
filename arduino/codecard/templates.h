@@ -273,7 +273,7 @@ void Template::render( String title, String subtitle, String body, String icon, 
     {
         // this->drawIcon64( 0, 0, icon, this->textColor );
 Serial.println( "Template::render :: call to imageFromUrl()" );
-        yield();
+        delay( 10 );
         iconBuffer = fetchImageFromUrl( icon, 0, 0, fingerprint , false, 3 );
     }
     

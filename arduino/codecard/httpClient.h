@@ -4,128 +4,19 @@
 */
 
 /*
-    Latticeware.com root CA
+    root CA
 */
 #ifdef HAS_SECURE
-const char LATTICEWARE_CERT [] PROGMEM = R"CERT(
------BEGIN CERTIFICATE-----
-MIIF3jCCA8agAwIBAgIQAf1tMPyjylGoG7xkDjUDLTANBgkqhkiG9w0BAQwFADCB
-iDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCk5ldyBKZXJzZXkxFDASBgNVBAcTC0pl
-cnNleSBDaXR5MR4wHAYDVQQKExVUaGUgVVNFUlRSVVNUIE5ldHdvcmsxLjAsBgNV
-BAMTJVVTRVJUcnVzdCBSU0EgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkwHhcNMTAw
-MjAxMDAwMDAwWhcNMzgwMTE4MjM1OTU5WjCBiDELMAkGA1UEBhMCVVMxEzARBgNV
-BAgTCk5ldyBKZXJzZXkxFDASBgNVBAcTC0plcnNleSBDaXR5MR4wHAYDVQQKExVU
-aGUgVVNFUlRSVVNUIE5ldHdvcmsxLjAsBgNVBAMTJVVTRVJUcnVzdCBSU0EgQ2Vy
-dGlmaWNhdGlvbiBBdXRob3JpdHkwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIK
-AoICAQCAEmUXNg7D2wiz0KxXDXbtzSfTTK1Qg2HiqiBNCS1kCdzOiZ/MPans9s/B
-3PHTsdZ7NygRK0faOca8Ohm0X6a9fZ2jY0K2dvKpOyuR+OJv0OwWIJAJPuLodMkY
-tJHUYmTbf6MG8YgYapAiPLz+E/CHFHv25B+O1ORRxhFnRghRy4YUVD+8M/5+bJz/
-Fp0YvVGONaanZshyZ9shZrHUm3gDwFA66Mzw3LyeTP6vBZY1H1dat//O+T23LLb2
-VN3I5xI6Ta5MirdcmrS3ID3KfyI0rn47aGYBROcBTkZTmzNg95S+UzeQc0PzMsNT
-79uq/nROacdrjGCT3sTHDN/hMq7MkztReJVni+49Vv4M0GkPGw/zJSZrM233bkf6
-c0Plfg6lZrEpfDKEY1WJxA3Bk1QwGROs0303p+tdOmw1XNtB1xLaqUkL39iAigmT
-Yo61Zs8liM2EuLE/pDkP2QKe6xJMlXzzawWpXhaDzLhn4ugTncxbgtNMs+1b/97l
-c6wjOy0AvzVVdAlJ2ElYGn+SNuZRkg7zJn0cTRe8yexDJtC/QV9AqURE9JnnV4ee
-UB9XVKg+/XRjL7FQZQnmWEIuQxpMtPAlR1n6BB6T1CZGSlCBst6+eLf8ZxXhyVeE
-Hg9j1uliutZfVS7qXMYoCAQlObgOK6nyTJccBz8NUvXt7y+CDwIDAQABo0IwQDAd
-BgNVHQ4EFgQUU3m/WqorSs9UgOHYm8Cd8rIDZsswDgYDVR0PAQH/BAQDAgEGMA8G
-A1UdEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQEMBQADggIBAFzUfA3P9wF9QZllDHPF
-Up/L+M+ZBn8b2kMVn54CVVeWFPFSPCeHlCjtHzoBN6J2/FNQwISbxmtOuowhT6KO
-VWKR82kV2LyI48SqC/3vqOlLVSoGIG1VeCkZ7l8wXEskEVX/JJpuXior7gtNn3/3
-ATiUFJVDBwn7YKnuHKsSjKCaXqeYalltiz8I+8jRRa8YFWSQEg9zKC7F4iRO/Fjs
-8PRF/iKz6y+O0tlFYQXBl2+odnKPi4w2r78NBc5xjeambx9spnFixdjQg3IM8WcR
-iQycE0xyNN+81XHfqnHd4blsjDwSXWXavVcStkNr/+XeTWYRUc+ZruwXtuhxkYze
-Sf7dNXGiFSeUHM9h4ya7b6NnJSFd5t0dCy5oGzuCr+yDZ4XUmFF0sbmZgIn/f3gZ
-XHlKYC6SQK5MNyosycdiyA5d9zZbyuAlJQG03RoHnHcAP9Dc1ew91Pq7P8yF1m9/
-qS3fuQL39ZeatTXaw2ewh0qpKJ4jjv9cJ2vhsE/zB+4ALtRZh8tSQZXq9EfX7mRB
-VXyNWQKV3WKdwrnuWih0hKWbt5DHDAff9Yk2dDLWKMGwsAvgnEzDHNb842m1R0aB
-L6KCq9NjRHDEjf8tM7qtj3u1cIiuPhnPQCjY/MiQu12ZIvVS5ljFH4gxQ+6IHdfG
-jjxDah2nGN59PRbxYvnKkKj9
------END CERTIFICATE-----
+const char TARGETED_CERT [] PROGMEM = R"CERT(
+    ### paste your cert here ###
 )CERT";
 
-X509List cert( LATTICEWARE_CERT );
+X509List cert( TARGETED_CERT );
 #endif
 
-// String httpRequest( WiFiClient& client, String httpMethod, String url, String host, String btnLabel, int btnFunction )
-// {
-  
-//     String mac = WiFi.macAddress();
-//     mac.replace(":", "");
 
-//     String contentType;
-//     String responseString;
-//     String headers;
-
-//     client.print( httpMethod + " " + url + " HTTP/1.0\r\n" +
-//                 "Host: " + host + "\r\n" + 
-//                 "X-CODECARD-ID: " + mac + "\r\n" +
-//                 "X-CODECARD-BUTTON-LABEL: " + btnLabel + "\r\n" + 
-//                 "X-CODECARD-BUTTON-FUNCTION: " + String(btnFunction) + "\r\n" +               
-//                 "Accept: */*\r\n" +
-//                 "Connection: close\r\n\r\n" );
-
-//     unsigned long timeout = millis();
-//     uint pending = 0;
-
-// Serial.println( "<sending>" );
-
-//     while( ( pending = client.available() ) == 0) 
-//     {
-//         if( millis() - timeout > 5000 ) 
-//         {
-//             Serial.println(F("  Request timeout!"));
-//             Serial.println(F(">>>"));
-//             return "";
-//         }
-//     }       
-// Serial.print( "<pending>" ); Serial.println( pending );
-                                
-//     int result = client.println();
-
-//     if (client.println() != 0) {
-//         Serial.println(F("  Failed to send request"));
-//         Serial.println( result );
-//         Serial.println(F(">>>"));   
-//         return "";
-//     }
-
-//     delay( 10 );
-
-//     String body = client.readString();
-// Serial.print( "<body>" ); Serial.println( body );
-  
-//     yield();
-    
-//     int index = body.indexOf( "\r\n\r\n" );
-//     headers = body.substring( 0, index );
-//     Serial.print( " headers " );
-//     Serial.println( headers );
-
-//     body = body.substring( index + 4 );
-//     Serial.print( " body " );
-//     Serial.println( body );
-
-//     Serial.println(F("> >"));
-//     if ( headers.indexOf("json") > -1) {
-//         responseString = body.substring( body.indexOf( '{' ) );
-//     }
-//     else {
-//         responseString = body;
-//     }
-    
-//     client.stop();
-
-//     return responseString;
-// }
-
-
-String secureRequest( String host, int port, String url, String btnLabel, int btnFunction ) 
+String request( String host, int port, String url, String btnLabel, int btnFunction, bool secure ) 
 {
-    // WiFiClientSecure client;
-    // BearSSL::WiFiClientSecure secureClient;
-    std::unique_ptr<BearSSL::WiFiClientSecure> secureClient( new BearSSL::WiFiClientSecure );
-
     String methodKey =  "method" + btnLabel + String(btnFunction);
     String httpMethod = getFromMemory(methodKey);
     String shaKey = "fingerprint" + btnLabel + String(btnFunction);
@@ -143,33 +34,50 @@ String secureRequest( String host, int port, String url, String btnLabel, int bt
     Serial.print(F("  method: "));
     Serial.println(httpMethod);
 
-#ifdef HAS_INSECURE
+    // WiFiClientSecure client;
+    // BearSSL::WiFiClientSecure secureClient;
+    // std::unique_ptr<BearSSL::WiFiClientSecure> secureClient( new BearSSL::WiFiClientSecure );
+    WiFiClient *client;
+
+    if( secure )
+    {
+        client = new BearSSL::WiFiClientSecure();
+
+        #ifdef HAS_INSECURE
 Serial.println( "insecure set" );
-    secureClient->setInsecure();
-#endif
+            ((WiFiClientSecure*) client)->setInsecure();
+        #endif
 
-#ifdef HAS_FINGERPRINT
-    if (fingerprint == "") {
-        Serial.println(F(""));
-        Serial.println(F("  This SSL url needs to have a corresponding SHA fingerprint."));
-        Serial.println(F("  Add one by typing 'fingerprint[btn][fn]=XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX'."));
-        Serial.println("  To learn how to retrieve an SSL SHA fingerprint go to " + String(projectSite));
-        Serial.println(F(">>>"));
-        return "";
-    }
+        #ifdef HAS_FINGERPRINT
+            if( fingerprint == "" ) 
+            {
+                Serial.println(F(""));
+                Serial.println(F("  This SSL url needs to have a corresponding SHA fingerprint."));
+                Serial.println(F("  Add one by typing 'fingerprint[btn][fn]=XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX'."));
+                Serial.println("  To learn how to retrieve an SSL SHA fingerprint go to " + String(projectSite));
+                Serial.println(F(">>>"));
+                return "";
+            }
 Serial.println( "fingerprint set" );
-    secureClient->setFingerprint( (const uint8_t*) fingerprint.c_str() );
-#endif
+            client->setFingerprint( (const uint8_t*) fingerprint.c_str() );
+        #endif
 
-#ifdef HAS_SECURE
+        #ifdef HAS_SECURE
 Serial.println( "trust anchor set" );
-    secureClient->setTrustAnchors( &cert );
-#endif
+            client->setTrustAnchors( &cert );
+        #endif
+
+    }
+    else
+    {
+        client = new WiFiClient();
+    }
 
     String payload;
     HTTPClient http;
+    http.setFollowRedirects( HTTPC_FORCE_FOLLOW_REDIRECTS );
     
-    if( http.begin( *secureClient, host, port, "/" + url, 1 ) )
+    if( http.begin( *client, host, port, "/" + url, secure ) )
     {
         int httpResult = http.GET();
 
@@ -194,225 +102,50 @@ Serial.println( "trust anchor set" );
     {
         Serial.printf( "[http] Unable to connect\n" );
     }
-    return payload;
+    delete client;
 
-}
-
-
-String request( String host, int port, String url, String btnLabel, int btnFunction, int secure )
-{
-    WiFiClient client;
-    
-    String methodKey =  "method" + btnLabel + String(btnFunction);
-    String httpMethod = getFromMemory(methodKey);
-    
-    Serial.println(F("Request:"));
-    Serial.print(F("  host: "));
-    Serial.println(host);
-    Serial.print(F("  port: "));
-    Serial.println(port);  
-    Serial.print(F("  url: "));
-    Serial.println(url); 
-    Serial.print(F("  method: "));
-    Serial.println(httpMethod);
-
-    String payload;
-    HTTPClient http;
-    
-    if( http.begin( client, host, port, "/" + url, 0 ) )
-    {
-        int httpResult = http.GET();
-
-        if( httpResult > 0 )
-        {
-            Serial.printf("[HTTP] GET... code: %d\n", httpResult );
-
-            if( httpResult == HTTP_CODE_OK || httpResult == HTTP_CODE_MOVED_PERMANENTLY ) 
-            {
-                payload = http.getString();
-                Serial.println(payload);
-            }
-        }
-        else
-        {
-            Serial.printf( "[http] GET... failed, error: %d : %s\n", httpResult, http.errorToString( httpResult ).c_str() );
-        }
-
-        http.end();
-    }
-    else
-    {
-        Serial.printf( "[http] Unable to connect\n" );
-    }
     return payload;
 }
 
 
-// void httpImage(String host, int port, String url, int16_t x, int16_t y, String fingerprint, bool with_color) 
-// {
-//     // WiFiClientSecure secureClient;
-//     BearSSL::WiFiClientSecure secureClient;
-//     // axTLS::WiFiClientSecure secureClient;
-    
-//     bool connection_ok = false;
-//     //   uint32_t startTime = millis();
-    
-//     if ((x >= display.width()) || (y >= display.height())) return;
-    
-//     Serial.println(F("Request:"));
-//     Serial.print(F("  host: "));
-//     Serial.println(host);
-//     Serial.print(F("  port: "));
-//     Serial.println(port);  
-//     Serial.print(F("  url: "));
-//     Serial.println(url); 
-//     Serial.print(F("  fingerprint: "));
-//     Serial.println(fingerprint);  
-//     Serial.println(F("  method: GET"));
-
-//     //const char* fingerprintChar = fingerprint.c_str();
-//     //secureClient.setFingerprint(fingerprintChar);
-//     //secureClient.setInsecure();
-//     //const uint8_t fp[20] = {0x6F, 0x9C, 0xC2, 0xBF, 0x5B, 0xBD, 0xF0, 0x50, 0xEA, 0x6E, 0x70, 0x10, 0x19, 0xDF, 0x32, 0xCD, 0x79, 0x01, 0x4C, 0x67};
-
-//     secureClient.setInsecure();
-// //    secureClient.setFingerprint( (const uint8_t*) fingerprint.c_str() );
-    
-//     secureClient.setTimeout(10000);
-//     if ( ! secureClient.connect(host, port ) ) 
-//     {
-//         Serial.println("  SSL connection failed");
-//         Serial.println(">>>");
-//         return;
-//     }
-    
-//     // if (!secureClient.verify(fingerprint.c_str(), host.c_str())) {
-//     //     Serial.println(F("  Connection insecure! Halting execution."));
-//     //     Serial.println(F(">>>"));
-//     //     return;
-//     // }
-    
-//     secureClient.print(String("GET ") + url + " HTTP/1.1\r\n" +
-//                 "Host: " + host + "\r\n" +
-//                 "User-Agent: CodeCard\r\n" +
-//                 "Connection: close\r\n\r\n");
-//     while (secureClient.connected())
-//     {
-//         String line = secureClient.readStringUntil('\n');
-//         if (!connection_ok)
-//         {
-//         connection_ok = line.startsWith("HTTP/1.1 200 OK"); // || line.startsWith("HTTP/1.1 30");
-//         if (connection_ok) {
-//             Serial.println(F("Response:"));
-//             Serial.print(F("  "));
-//             Serial.println(line);
-//         }
-//         //if (!connection_ok) Serial.println(line);
-//         }
-//         if (!connection_ok) Serial.println(line);
-//         //Serial.println(line);
-//         if (line == "\r")
-//         {
-//         //Serial.println("headers received");
-//         break;
-//         }
-//     }
-//     if (!connection_ok) return;
-//     displayImageFromUrl( secureClient, x, y, connection_ok, with_color );
-// }
-
-
-// void httpImage( String host, int port, String url, int16_t x, int16_t y, bool with_color, int rotation ) 
-// { 
-// Serial.println( "httpImage" );
-
-//     WiFiClient client;
-//     bool connection_ok = false;
-  
-//     if (( x >= display.width() ) || ( y >= display.height() ) ) return;
-
-//     Serial.println(F("Request:"));
-//     Serial.print(F("  host: "));
-//     Serial.println(host);
-//     Serial.print(F("  port: "));
-//     Serial.println(port);  
-//     Serial.print(F("  url: "));
-//     Serial.println(url); 
-//     Serial.println(F("  method: GET"));
-
-//     if( ! client.connect( host, port ) )
-//     {
-//             Serial.println("  Connection failed");
-//             return;
-//     }
-
-//     client.print( String("GET ") + url + " HTTP/1.1\r\n" +
-//                "Host: " + host + "\r\n" +
-//                "User-Agent: CodeCard\r\n" +
-//                "Connection: close\r\n\r\n");
-
-// Serial.println("request sent");
-
-//     unsigned long timeout = millis();
-
-//     while (client.available() == 0) 
-//     {
-//         if (millis() - timeout > 5000) 
-//         {
-//             Serial.println(F("  Request timeout!"));
-//             Serial.println(F(">>>"));
-//             return;
-//         }
-//     }       
-                                
-//     int result = client.println();
-
-//     if (client.println() != 0) 
-//     {
-//         Serial.println(F("  Failed to send request"));
-//         Serial.println( result );
-//         Serial.println(F(">>>"));   
-//         return;
-//     }
-
-
-//     while ( client.available() )
-//     {
-//         String header = client.readStringUntil( '\n' );
-
-//     Serial.println( "header :: " + header );
-
-//         // if( ! connection_ok )
-//         // {
-//             // connection_ok = line.startsWith("HTTP/1.1 200 OK"); // || line.startsWith("HTTP/1.1 30");
-//             // if (connection_ok) Serial.println(line);
-//         //if (!connection_ok) Serial.println(line);
-//         // }
-
-//         // if (!connection_ok) Serial.println(line);
-//     // Serial.println( headers );
-//         if( header == "\r" )
-//         {
-//             Serial.println("headers received");
-//             break;
-//         }
-//     }
-//     // if (!connection_ok) return;
-//     displayImageFromUrl( client, x, y, connection_ok, with_color, rotation );
-// }
-
-
-// void httpImage( String host, int port, String url, int16_t x, int16_t y, bool with_color ) 
-// {
-//     httpImage( host, port, url, x, y, with_color, 0 );
-// }
-
-
-uint8_t* fetchHttpImage( String host, int port, String url, int16_t x, int16_t y, bool with_color, int rotation ) 
+uint8_t* fetchHttpImage( String host, int port, String url, int16_t x, int16_t y, bool with_color, int rotation, String fingerprint ) 
 { 
 Serial.println( "httpImage" );
 
-    WiFiClient client;
+    WiFiClient *client;
+    
+    if( port == 443 )
+    {
+        client = new BearSSL::WiFiClientSecure();
+
+        #ifdef HAS_INSECURE
+Serial.println( "insecure set" );
+            ((WiFiClientSecure*) client)->setInsecure();
+        #endif
+
+        #ifdef HAS_FINGERPRINT
+            if (fingerprint == "") {
+                Serial.println(F(""));
+                Serial.println(F("  This SSL url needs to have a corresponding SHA fingerprint."));
+                Serial.println(F("  Add one by typing 'fingerprint[btn][fn]=XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX'."));
+                Serial.println("  To learn how to retrieve an SSL SHA fingerprint go to " + String(projectSite));
+                Serial.println(F(">>>"));
+                return "";
+            }
+Serial.println( "fingerprint set" );
+            client->setFingerprint( (const uint8_t*) fingerprint.c_str() );
+        #endif
+
+        #ifdef HAS_SECURE
+Serial.println( "trust anchor set" );
+            client->setTrustAnchors( &cert );
+        #endif
+
+    }
+    else
+    {
+        client = new WiFiClient();
+    }
     bool connection_ok = false;
   
     if (( x >= display.width() ) || ( y >= display.height() ) ) return NULL;
@@ -426,100 +159,65 @@ Serial.println( "httpImage" );
     Serial.println(url); 
     Serial.println(F("  method: GET"));
 
-    if( ! client.connect( host, port ) )
-    {
-            Serial.println("  Connection failed");
-            return NULL;
-    }
-
-    client.print( String("GET ") + url + " HTTP/1.1\r\n" +
-               "Host: " + host + "\r\n" +
-               "User-Agent: CodeCard\r\n" +
-               "Connection: close\r\n\r\n");
-
-Serial.println("request sent");
-
-    unsigned long timeout = millis();
-
-    while (client.available() == 0) 
-    {
-        if (millis() - timeout > 5000) 
-        {
-            Serial.println(F("  Request timeout!"));
-            Serial.println(F(">>>"));
-            return NULL;
-        }
-    }       
-                                
-    int result = client.println();
-
-    if (client.println() != 0) 
-    {
-        Serial.println(F("  Failed to send request"));
-        Serial.println( result );
-        Serial.println(F(">>>"));   
-        return NULL;
-    }
-
-
-    while ( client.available() )
-    {
-        String header = client.readStringUntil( '\n' );
-
-    Serial.println( "header :: " + header );
-
-        if( header == "\r" )
-        {
-            Serial.println("headers received");
-            break;
-        }
-    }
-    // if (!connection_ok) return;
-    return fetchImageFromClient( client, x, y, connection_ok, with_color, rotation );
-}
-
-
-// void imageFromUrl( String url, int16_t x, int16_t y, String fingerprint, bool with_color, int rotation )
-// {
-// Serial.println( "imageFromUrl :: " + url );
-//     String protocol = parseValue( url, '/', 0 );
-//     String host = parseValue( url, '/', 2 );
-//     String portString = parseValue( host, ':', 1 ) ;
-//     host = parseValue( host, ':', 0 );
+    uint8_t* imageBuffer = NULL;
+    HTTPClient http;
+    http.setFollowRedirects( HTTPC_FORCE_FOLLOW_REDIRECTS );
     
-//     if (protocol == "http:") {
-//         int port = ( portString.length() != 0 ) ? portString.toInt() : 443;
-//         httpImage(host, port, url, x, y, fingerprint, with_color);
-//     } else {
-//         int port = ( portString.length() != 0 ) ? portString.toInt() : 80;
-//         httpImage( host, port, url, x, y, with_color, rotation );
-//     }
-// }
+    if( http.begin( *client, host, port, url, (port == 443) ) )
+    {
+        int httpResult = http.GET();
+
+        if( httpResult > 0 )
+        {
+            Serial.printf("[http] GET... code: %d\n", httpResult );
+
+            if( httpResult == HTTP_CODE_OK || httpResult == HTTP_CODE_MOVED_PERMANENTLY ) 
+            {
+                // payload = http.getString();
+                // Serial.println(payload);
+                imageBuffer = fetchImageFromClient( *client, x, y, connection_ok, with_color, rotation );
+            }
+        }
+        else
+        {
+            Serial.printf( "[http] GET... failed, error: %d : %s\n", httpResult, http.errorToString( httpResult ).c_str() );
+        }
+
+        http.end();
+    }
+    else
+    {
+        Serial.printf( "[http] Unable to connect\n" );
+    }
+
+    delete client;
+    // if (!connection_ok) return;
+    // return fetchImageFromClient( *client, x, y, connection_ok, with_color, rotation );
+    return imageBuffer;
+}
 
 
 uint8_t* fetchImageFromUrl( String url, int16_t x, int16_t y, String fingerprint, bool with_color, int rotation )
 {
 Serial.println( "imageFromUrl :: " + url );
     String protocol = parseValue( url, '/', 0 );
+
+    String uri = url.substring( url.indexOf( '/', 10 ) );
+
     String host = parseValue( url, '/', 2 );
     String portString = parseValue( host, ':', 1 ) ;
     host = parseValue( host, ':', 0 );
     
-    // if (protocol == "http:") {
-    //     int port = ( portString.length() != 0 ) ? portString.toInt() : 443;
-    //     httpImage(host, port, url, x, y, fingerprint, with_color);
-    // } else {
+    if (protocol == "https:") {
+        int port = ( portString.length() != 0 ) ? portString.toInt() : 443;
+        return fetchHttpImage( host, port, uri, x, y, with_color, rotation, fingerprint );
+    }
+    else 
+    {
         int port = ( portString.length() != 0 ) ? portString.toInt() : 80;
-        return fetchHttpImage( host, port, url, x, y, with_color, rotation );
-    // }
+        return fetchHttpImage( host, port, uri, x, y, with_color, rotation, "" );
+    }
 }
-
-
-// void imageFromUrl( String url, int16_t x, int16_t y, String fingerprint, bool with_color )
-// {
-//     imageFromUrl( url, x, y, fingerprint, with_color, 0 );
-// }
-
 
 
 uint8_t *image_buffer;
